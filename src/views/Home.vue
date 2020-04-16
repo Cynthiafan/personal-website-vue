@@ -1,18 +1,52 @@
-<template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
-</template>
+<template lang="pug">
+  div.home-page 
+    header
+      navigation-bar
+    main
+      landing
+      about
+      experience
+      portfolio
+      contact
 
+</template>
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import NavigationBar from '@/components/NavigationBar';
+import Landing from '@/components/HomeLanding';
+import About from '@/components/HomeAbout';
+import Experience from '@/components/HomeExperience';
+import Portfolio from '@/components/HomePortfolio';
+import Contact from '@/components/HomeContact';
 
 export default {
-  name: 'home',
   components: {
-    HelloWorld
+    NavigationBar,
+    Landing,
+    About,
+    Experience,
+    Portfolio,
+    Contact,
+  },
+  name: 'home',
+};
+</script>
+<style lang="scss" scoped>
+.home-page {
+  width: 100%;
+  min-height: 100vh;
+  font-family: $font-mono;
+  background: $color-homepageBackground;
+  color: $color-lightgray;
+}
+header {
+  width: 100%;
+  position: fixed;
+}
+main {
+  padding: 0px 60px;
+  & > section {
+    min-height: 100vh;
+    padding: 20px;
   }
 }
-</script>
+</style>
