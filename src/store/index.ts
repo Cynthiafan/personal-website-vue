@@ -6,11 +6,11 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     blocks: [
-      { id: 'about', text: 'About' },
-      { id: 'experience', text: 'Experience' },
-      { id: 'portfolio', text: 'Portfolio' },
-      { id: 'contact', text: 'Contact' },
-      { id: 'techBlog', text: 'Blog' },
+      { path: '#about', text: 'About' },
+      { path: '#experience', text: 'Experience' },
+      { path: '#skill', text: 'Skill' },
+      { path: `/storybook/index.html`, text: 'Portfolio', isStatic: true },
+      { path: '#techBlog', text: 'Blog' },
     ],
     experience: [
       {

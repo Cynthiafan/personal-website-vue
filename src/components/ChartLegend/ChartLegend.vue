@@ -77,7 +77,7 @@ export default {
           .attr('x2', 20)
           .attr('y2', 0)
           .attr('class', 'line')
-          .classed('dashed', d => d.dashed)
+          .classed('dashed', (d) => d.dashed)
           .attr('stroke', (d, i) => d.color || this.colors(i));
       } else {
         legends
@@ -95,12 +95,12 @@ export default {
 
       const text = legends
         .append('div')
-        .text(d => d.label)
+        .text((d) => d.label)
         .attr('class', 'text')
         .style('color', (d, i) => d.color || this.colors(i));
 
       legends.on('click', (legend, i) => {
-        let clickIndex = this.dataset.findIndex(obj => obj === legend);
+        const clickIndex = this.dataset.findIndex((obj) => obj === legend);
         this.selectedIndex = clickIndex === this.selectedIndex ? null : clickIndex;
       });
 
@@ -110,7 +110,9 @@ export default {
       d3.select(`#${this.id}`)
         .selectAll('.legends__group')
         .style('border-color', (d, i) => {
-          if (i === this.selectedIndex) return d.color || this.colors(i);
+          if (i === this.selectedIndex) {
+            return d.color || this.colors(i);
+          }
         })
         .classed('selected', (d, i) => i === this.selectedIndex)
         .style('transition', '0.2s');

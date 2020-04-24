@@ -16,14 +16,14 @@ export default {
   },
   methods: {
     throwBall() {
-      let ball = document.querySelector('.ball');
-      let hole = document.querySelector('.hole');
+      const ball = document.querySelector('.ball');
+      const hole = document.querySelector('.hole');
 
-      let { x: startX, y: startY, width: ballW, height: ballH } = ball.getBoundingClientRect();
-      let { x: holeX, y: holeY, width: holeWidth, height: holeHeight } = hole.getBoundingClientRect();
+      const { x: startX, y: startY, width: ballW, height: ballH } = ball.getBoundingClientRect();
+      const { x: holeX, y: holeY, width: holeWidth, height: holeHeight } = hole.getBoundingClientRect();
 
-      let endX = holeX + holeWidth / 2 - ballW / 2;
-      let endY = holeY + holeHeight / 2 - ballH / 2;
+      const endX = holeX + holeWidth / 2 - ballW / 2;
+      const endY = holeY + holeHeight / 2 - ballH / 2;
 
       const cloneBall = cloneAndSetStyle(ball);
 

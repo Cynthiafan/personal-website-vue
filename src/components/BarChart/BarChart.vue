@@ -93,7 +93,7 @@ export default {
   },
   computed: {
     formatLegend() {
-      return this.meta.legend.length ? this.meta.legend.map(label => ({ label })) : [];
+      return this.meta.legend.length ? this.meta.legend.map((label) => ({ label })) : [];
     },
     xBoundaryPosition() {
       return this.scrollableWidth - this.chartWidth - this.margin.right;
@@ -107,7 +107,9 @@ export default {
       this.focusBar();
     },
     dataset(val, oldVal) {
-      if (JSON.stringify(val) === JSON.stringify(oldVal)) return;
+      if (JSON.stringify(val) === JSON.stringify(oldVal)) {
+        return;
+      }
 
       this.initSvgArea();
     },
@@ -117,8 +119,8 @@ export default {
   },
   methods: {
     registClick() {
-      this.bars.on('click', bar => {
-        let clickedIndex = this.meta.legend.findIndex(legend => legend === bar.key);
+      this.bars.on('click', (bar) => {
+        const clickedIndex = this.meta.legend.findIndex((legend) => legend === bar.key);
         this.selectedIndex = clickedIndex === this.selectedIndex ? null : clickedIndex;
       });
     },
@@ -126,7 +128,7 @@ export default {
       d3.selectAll(`#chart-${this.id} > *`).remove();
 
       this.margin = { top: 25, right: 18, bottom: 30, left: 35 };
-      this.xAxisLabels = this.dataset.map(item => item.label);
+      this.xAxisLabels = this.dataset.map((item) => item.label);
 
       const chart = d3.select(`#chart-${this.id}`);
 
@@ -149,7 +151,7 @@ export default {
           [this.scrollableWidth + this.margin.right, this.chartHeight],
         ])
         .on('zoom', () => {
-          let tx = d3.event.transform.x;
+          const tx = d3.event.transform.x;
           d3.select(`#scrollable-${this.id}`).attr('transform', `translate(${tx}, 0)`);
           this.tempNum = -tx;
         });
@@ -159,7 +161,7 @@ export default {
         .select(`#chart-${this.id}`)
         .append('g')
         .attr('transform', `translate(0, 0)`)
-        .call(this.enabledScroll ? zoom : () => {});
+        .call(this.enabledScroll ? zoom : () => null);
 
       this.svg
         .append('clipPath')
@@ -182,21 +184,21 @@ export default {
         .attr('class', 'x axis')
         .attr('transform', 'translate(0, 0)');
 
-      let vm = this;
+      const vm = this;
 
-      let axisLabels = this.svg.append('g').attr('class', 'axisLabel');
-      let xAxisLabel = axisLabels
+      const axisLabels = this.svg.append('g').attr('class', 'axisLabel');
+      const xAxisLabel = axisLabels
         .append('text')
         .text(this.meta.xAxisLabel)
         .attr('text-anchor', 'middle')
         .attr('x', this.chartWidth / 2 + this.margin.left)
         .attr('y', this.chartHeight + this.margin.top + this.margin.bottom / 2);
 
-      let yAxisLabel = axisLabels
+      const yAxisLabel = axisLabels
         .append('text')
         .text(this.meta.yAxisLabel)
-        .attr('x', function() {
-          // let textWidth = this.getComputedTextLength() / 2;
+        .attr('x', () => {
+          // const textWidth = this.getComputedTextLength() / 2;
 
           // return vm.margin.left - textWidth;
           return 0;
@@ -206,11 +208,11 @@ export default {
       this.meta.legend.length ? this.renderGroupChart() : this.renderNormalChart();
     },
     renderNormalChart() {
-      let maxValue = d3.max(this.dataset, d => d.value);
+      const maxValue = d3.max(this.dataset, (d) => d.value);
 
       const xScale = d3
         .scaleBand()
-        .domain(this.dataset.map(item => item.label))
+        .domain(this.dataset.map((item) => item.label))
         .rangeRound([this.margin.left, this.enabledScroll ? this.scrollableWidth : this.chartWidth])
         .padding(0.2);
 
@@ -231,7 +233,7 @@ export default {
           d3
             .axisLeft(yScale)
             .ticks(Math.min(Math.max(this.chartHeight / 40, 2), maxValue))
-            .tickFormat(d => (parseInt(d) === d ? d3.format('d')(d) : null))
+            .tickFormat((d) => (parseInt(d, 10) === d ? d3.format('d')(d) : null)),
         );
 
       this.bars = this.svg
@@ -243,22 +245,22 @@ export default {
         .enter()
         .append('rect')
         .attr('width', xScale.bandwidth)
-        .attr('x', d => xScale(d.label))
-        .attr('y', d => yScale(d.value))
-        .attr('height', d => yScale(0) - yScale(d.value))
+        .attr('x', (d) => xScale(d.label))
+        .attr('y', (d) => yScale(d.value))
+        .attr('height', (d) => yScale(0) - yScale(d.value))
         .attr('fill', (d, i) => this.colors(i));
     },
     renderGroupChart() {
       let maxValue;
-      this.dataset.forEach(item => {
-        this.meta.legend.forEach(legend => {
+      this.dataset.forEach((item) => {
+        this.meta.legend.forEach((legend) => {
           maxValue = maxValue > item[legend] ? maxValue : item[legend];
         });
       });
 
       this.xScale0 = d3
         .scaleBand()
-        .domain(this.dataset.map(item => item.label))
+        .domain(this.dataset.map((item) => item.label))
         .range([this.margin.left, this.enabledScroll ? this.scrollableWidth : this.chartWidth])
         .padding(0.2)
         .paddingInner(0.25);
@@ -285,7 +287,7 @@ export default {
           d3
             .axisLeft(yScale)
             .ticks(Math.min(Math.max(this.chartHeight / 40, 2), maxValue))
-            .tickFormat(d => (parseInt(d) === d ? d3.format('d')(d) : null))
+            .tickFormat((d) => (parseInt(d, 10) === d ? d3.format('d')(d) : null)),
         );
 
       this.bars = this.svg
@@ -295,15 +297,15 @@ export default {
         .data(this.dataset)
         .join('g')
         .attr('class', 'barGroup')
-        .attr('transform', d => `translate(${this.xScale0(d.label)}, 0)`)
+        .attr('transform', (d) => `translate(${this.xScale0(d.label)}, 0)`)
         .selectAll('rect')
-        .data(d => this.meta.legend.map(key => ({ key, value: d[key] })))
+        .data((d) => this.meta.legend.map((key) => ({ key, value: d[key] })))
         .join('rect')
         .attr('data-key', (d, i) => d.key)
-        .attr('x', d => this.xScale1(d.key))
-        .attr('y', d => yScale(d.value))
+        .attr('x', (d) => this.xScale1(d.key))
+        .attr('y', (d) => yScale(d.value))
         .attr('width', this.xScale1.bandwidth())
-        .attr('height', d => yScale(0) - yScale(d.value))
+        .attr('height', (d) => yScale(0) - yScale(d.value))
         .attr('fill', (d, i) => this.colors(d.key));
 
       this.registClick();
@@ -314,8 +316,8 @@ export default {
         .keys(this.meta.legend)
         .offset(d3.stackOffsetDiverging)(this.dataset);
 
-      const stackMax = d3.max(layers, legend => {
-        return d3.max(legend, label => label[1]);
+      const stackMax = d3.max(layers, (legend) => {
+        return d3.max(legend, (label) => label[1]);
       });
 
       const xScale = d3
@@ -351,8 +353,8 @@ export default {
 
       const rect = group
         .selectAll('rect')
-        .data(d => {
-          d.forEach(d1 => {
+        .data((d) => {
+          d.forEach((d1) => {
             d1.key = d.key;
             return d1;
           });
@@ -361,18 +363,18 @@ export default {
         .enter()
         .append('rect')
         .attr('width', xScale.bandwidth)
-        .attr('x', d => xScale(d.data.label))
-        .attr('y', d => yScale(d[1]))
-        .attr('height', d => yScale(d[0]) - yScale(d[1]));
+        .attr('x', (d) => xScale(d.data.label))
+        .attr('y', (d) => yScale(d[1]))
+        .attr('height', (d) => yScale(d[0]) - yScale(d[1]));
     },
     focusBar() {
-      let barGroup = d3.select(`#${this.id}`).selectAll('.barGroup');
+      const barGroup = d3.select(`#${this.id}`).selectAll('.barGroup');
 
       barGroup.nodes().forEach((d, i) => {
-        let rects = d3.select(d).selectAll('rect');
+        const rects = d3.select(d).selectAll('rect');
 
         rects.nodes().forEach((dd, j) => {
-          let key = d3.select(dd).attr('data-key');
+          const key = d3.select(dd).attr('data-key');
 
           if (this.selectedIndex === null) {
             d3.select(dd).attr('fill', this.colors(key));

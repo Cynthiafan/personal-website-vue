@@ -4,7 +4,8 @@
     div.links
       a(v-for="block in $store.state.blocks" 
         :key="block.id"
-        :href="`#${block.id}`") {{ block.text }}
+        :href="`${block.path}`"
+        :target="block.isStatic ? '_blank': '_self'") {{ block.text }}
 </template>
 <script>
 export default {};

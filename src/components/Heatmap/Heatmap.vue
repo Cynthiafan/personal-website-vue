@@ -11,11 +11,13 @@
 </template>
 <script>
 import * as d3 from 'd3';
-import moment from 'moment';
+import { initWeekdays, parseHour } from '@/plugins/dateFns';
+import { addDays } from 'date-fns';
 
 export default {
   data() {
     return {
+      weekDays: initWeekdays(),
       margin: { top: 10, right: 20, bottom: 50, left: 70 },
       svg: null,
       svgWidth: null,
@@ -40,7 +42,7 @@ export default {
     dataset: {
       type: Array,
       default: () => {
-        let ret = [];
+        const ret = [];
         for (let i = 1; i <= 7; i++) {
           for (let j = 1; j <= 24; j++) {
             ret.push({
@@ -83,8 +85,8 @@ export default {
     },
     dayHours() {
       // total hours label
-      let timeLabelCounts = this.intervalCounts + 1;
-      let hours = [];
+      const timeLabelCounts = this.intervalCounts + 1;
+      const hours = [];
 
       new Array(timeLabelCounts).fill().forEach((acc, index) => {
         hours.push(`${index + this.hourStart}:00`);
@@ -92,25 +94,21 @@ export default {
 
       return hours;
     },
-    weekDays() {
-      return Array.apply(null, Array(7)).map(function(_, i) {
-        return moment(i, 'e')
-          .startOf('week')
-          .isoWeekday(i + 1)
-          .format('ddd');
-      });
-    },
     isDrawable() {
-      if (!this.dataset.length) return false;
+      if (!this.dataset.length) {
+        return false;
+      }
 
-      let hasValue = !!this.dataset.find(item => item.value > 0);
+      const hasValue = !!this.dataset.find((item) => item.value > 0);
 
       return hasValue;
     },
   },
   watch: {
     dataset(val, oldVal) {
-      if (JSON.stringify(val) === JSON.stringify(oldVal)) return;
+      if (JSON.stringify(val) === JSON.stringify(oldVal)) {
+        return;
+      }
 
       setTimeout(() => {
         this.initChart();
@@ -118,13 +116,13 @@ export default {
     },
   },
   mounted() {
-    moment.locale('zh_TW');
-
     this.initChart();
   },
   methods: {
     initChart() {
-      if (!this.isDrawable) return;
+      if (!this.isDrawable) {
+        return;
+      }
 
       d3.selectAll(`#${this.id} > *`).remove();
       d3.selectAll(`#legend-${this.id} > *`).remove();
@@ -148,7 +146,7 @@ export default {
         .data(this.weekDays)
         .enter()
         .append('text')
-        .text(d => d)
+        .text((d) => d)
         .attr('x', (d, i) => {
           return i * this.rectWidth - 5;
         })
@@ -157,9 +155,12 @@ export default {
         .style('font-size', 12)
         .attr('transform', `translate(${this.rectWidth / 2}, 0)`);
 
+      const hourStart = parseHour(this.hourStart.toString());
+      const hourEnd = this.hourEnd === 24 ? addDays(parseHour('0'), 1) : parseHour(this.hourEnd.toString());
+
       const timeScale = d3
         .scaleTime()
-        .domain([moment(`${this.hourStart}`, 'H'), moment(`${this.hourEnd}`, 'H')])
+        .domain([hourStart, hourEnd])
         .range([0, this.chartHeight]);
 
       const yAxis = d3
@@ -176,7 +177,7 @@ export default {
 
       this.colorScale = d3
         .scaleQuantile()
-        .domain([0, bucket - 1, d3.max(this.dataset, d => d.value)])
+        .domain([0, bucket - 1, d3.max(this.dataset, (d) => d.value)])
         .range(this.colors);
 
       const rects = heatMap
@@ -186,8 +187,8 @@ export default {
         .data(this.dataset)
         .enter()
         .append('rect')
-        .attr('x', d => d.weekday * this.rectWidth - 40)
-        .attr('y', d => (d.hour - 1) * this.rectHeight)
+        .attr('x', (d) => d.weekday * this.rectWidth - 40)
+        .attr('y', (d) => (d.hour - 1) * this.rectHeight)
         .attr('width', this.rectWidth)
         .attr('height', this.rectHeight)
         .style('fill', this.colors[0])
@@ -197,16 +198,16 @@ export default {
       rects
         .transition()
         .duration(800)
-        .style('fill', d => this.colorScale(d.value));
+        .style('fill', (d) => this.colorScale(d.value));
 
       this.initLegend();
     },
     initLegend() {
-      const rectWidth = 40,
-        rectHeight = 15,
-        margin = { top: 30, right: 10, bottom: 30, left: 10 },
-        svgWidth = rectWidth * this.colors.length,
-        svgHeight = rectHeight + margin.top + margin.bottom;
+      const rectWidth = 40;
+      const rectHeight = 15;
+      const margin = { top: 30, right: 10, bottom: 30, left: 10 };
+      const svgWidth = rectWidth * this.colors.length;
+      const svgHeight = rectHeight + margin.top + margin.bottom;
 
       const legend = d3
         .select(`#legend-${this.id}`)
@@ -218,7 +219,7 @@ export default {
         .attr('class', 'legend')
         .attr('transform', `translate(0, ${margin.top})`)
         .selectAll('rect')
-        .data([0].concat(this.colorScale.quantiles()), d => d)
+        .data([0].concat(this.colorScale.quantiles()), (d) => d)
         .enter()
         .append('rect')
         .attr('x', (d, i) => rectWidth * i)
@@ -232,7 +233,7 @@ export default {
         .data(['低', '中', '高'])
         .enter()
         .append('text')
-        .text(d => d)
+        .text((d) => d)
         .attr('font-size', 12)
         .attr('text-anchor', 'middle')
         .attr('x', (d, i) => rectWidth * (i + 1) - 20)

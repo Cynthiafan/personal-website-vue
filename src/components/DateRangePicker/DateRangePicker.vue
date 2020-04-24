@@ -21,19 +21,38 @@
           div.picker__calendar__content__week
             div.day(
               v-for="(day, i) in daysInfo(date.year, date.month)" :key="i"
-              :class="[handleDateClass({ year: date.year, month: date.month, day })]" 
+              :class="handleDateClass(`${date.year}/${date.month}/${day}`)"
               @click="handleDateRange(`${date.year}/${date.month}/${day}`)") {{ day }}
       div.btn
         button.btn__cancel(@click="cancel") 取消
         button.btn__submit(:disabled="!result.dateEnd" @click="submit") 確定
 </template>
 <script>
-import moment from 'moment';
+import { startOfYesterday } from 'date-fns';
+import {
+  addMonths,
+  differenceInDays,
+  getDay,
+  getDaysInMonth,
+  getMonth,
+  getYear,
+  isAfter,
+  isBefore,
+  isSameDay,
+  isWithinInterval,
+  isValid,
+  parse,
+  subMonths,
+  startOfMonth,
+} from 'date-fns/fp';
+import { initWeekdays, parseDate, dfFormat, formatToISOWeekday } from '@/plugins/dateFns';
 import { smoothScrollTo } from '@/utils/browser-action.utils';
+import { flow } from 'lodash/fp';
 
 export default {
   data() {
     return {
+      weekdays: initWeekdays(),
       result: {
         dateStart: '',
         dateEnd: '',
@@ -44,14 +63,12 @@ export default {
   },
   props: {
     minDate: {
-      type: [String, Date],
+      type: String,
     },
     maxDate: {
       type: [String, Date],
       default: () => {
-        return moment()
-          .subtract(1, 'day')
-          .format('YYYY/M/D');
+        return dfFormat(startOfYesterday());
       },
     },
     defaultRenderMonths: {
@@ -68,23 +85,13 @@ export default {
     },
   },
   computed: {
-    weekdays() {
-      return Array.apply(null, Array(7)).map(function(_, i) {
-        return moment(i, 'e')
-          .locale('zh-TW')
-          .startOf('week')
-          .isoWeekday(i + 1)
-          .format('dd');
-      });
-    },
     isRenderAllTheDates() {
       if (!this.minDate || !this.dates.length) {
         return false;
       }
 
-      let [minYear, minMonth] = moment(this.minDate, 'YYYY/M/D').toArray();
-      minMonth += 1; // because month is start from index 0
-      let { year: currentMinYear, month: currentMinMonth } = this.dates[0];
+      const [minYear, minMonth] = this.minDate.split('/');
+      const { year: currentMinYear, month: currentMinMonth } = this.dates[0];
 
       return minYear === currentMinYear && minMonth === currentMinMonth ? true : false;
     },
@@ -100,25 +107,32 @@ export default {
   },
   methods: {
     initDates() {
-      let minDate = this.minDate
-        ? moment(this.minDate, 'YYYY/M/D')
-        : moment().subtract(this.defaultRenderMonths, 'month');
-      minDate = moment(minDate, 'YYYY/M/D').startOf('month');
-      let maxDate = moment(this.maxDate, 'YYYY/M/D').startOf('month');
-      let monthYearGroup = [];
+      let minDate;
+
+      if (this.minDate) {
+        minDate = flow(parseDate, startOfMonth)(this.minDate);
+      } else {
+        const subDefaultMonths = subMonths(this.defaultRenderMonths);
+        minDate = flow(subDefaultMonths, startOfMonth)(new Date());
+      }
+
+      const maxDate = flow(parseDate, startOfMonth)(this.maxDate);
+      const monthYearGroup = [];
+      const addOneMonth = addMonths(1);
 
       while (maxDate >= minDate) {
         monthYearGroup.push({
-          year: minDate.format('YYYY'),
-          month: minDate.format('M'),
+          year: `${getYear(minDate)}`,
+          month: `${getMonth(minDate) + 1}`,
         });
-        minDate.add(1, 'month');
+        minDate = addOneMonth(minDate);
       }
 
       this.dates = monthYearGroup;
     },
     scrollToCurrentYearMonth() {
-      let currentMonthYear = moment().format('YYYY-M');
+      const currentMonthYear = dfFormat(new Date(), 'yyyy-M');
+
       smoothScrollTo({
         el: `#group-${currentMonthYear}`,
         container: '.picker__calendar__content',
@@ -131,11 +145,11 @@ export default {
         return;
       }
 
-      let currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop || e.srcElement.scrollTop;
-      let { year: currentMinYear, month: currentMinMonth } = this.dates[0];
+      const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop || e.srcElement.scrollTop;
+      const { year: currentMinYear, month: currentMinMonth } = this.dates[0];
 
       if (currentScrollPosition < 100) {
-        let isCrossYear = !!(currentMinMonth - 1 === 0);
+        const isCrossYear = !!(currentMinMonth - 1 === 0);
         this.dates.unshift({
           year: isCrossYear ? currentMinYear - 1 : currentMinYear,
           month: isCrossYear ? 12 : currentMinMonth - 1,
@@ -143,23 +157,27 @@ export default {
       }
     },
     daysInfo(year, month) {
-      let daysInMonth = moment(`${year}-${month}`, 'YYYY-M').daysInMonth();
-      let firstDayWeekday = moment(`${year}-${month}`, 'YYYY-M').isoWeekday();
-      let totalBlock = new Array(firstDayWeekday - 1).fill('');
+      const parseYearMonth = parse(new Date(), 'yyyy/M');
 
-      new Array(daysInMonth).fill().forEach((d, i) => {
-        totalBlock.push(i + 1);
-      });
+      const daysInMonth = flow(parseYearMonth, getDaysInMonth)(`${year}/${month}`);
+      const firstWeekdayOfMonth = flow(parseYearMonth, getDay, formatToISOWeekday)(`${year}/${month}`);
 
-      return totalBlock;
+      const totalBlockInMonth = [
+        ...Array(firstWeekdayOfMonth - 1).fill(''),
+        ...Array(daysInMonth)
+          .fill('')
+          .map((d, i) => i + 1),
+      ];
+
+      return totalBlockInMonth;
     },
     checkIsDayRangeValid(date) {
       if (!this.maxRangeLength) {
         return true;
       }
 
-      let { dateStart, dateEnd } = this.result;
-      let selectedDays = moment(date, 'YYYY/M/D').diff(moment(dateStart, 'YYYY/M/D'), 'days') + 1;
+      const { dateStart, dateEnd } = this.result;
+      const selectedDays = differenceInDays(parseDate(dateStart))(parseDate(date)) + 1;
 
       if (selectedDays > this.maxRangeLength) {
         this.isOpenWarning = true;
@@ -172,37 +190,55 @@ export default {
       return true;
     },
     handleDateRange(date) {
-      let { dateStart, dateEnd } = this.result;
+      const { dateStart, dateEnd } = this.result;
+      const isDateBeforeDateStart = flow(parseDate, isBefore)(dateStart);
 
-      if (!dateStart || (dateStart && dateEnd) || moment(date, 'YYYY/M/D').isBefore(moment(dateStart, 'YYYY/M/D'))) {
+      if (!dateStart || (dateStart && dateEnd) || flow(parseDate, isDateBeforeDateStart)(date)) {
         this.result.dateStart = date;
         this.result.dateEnd = '';
       } else {
         this.result.dateEnd = this.checkIsDayRangeValid(date) ? date : '';
       }
     },
-    handleDateClass({ year, month, day }) {
-      // the empty position before 1st in every month
-      if (!day) {
+    isDateDisabled(date) {
+      date = parseDate(date);
+      const isDateAfterMaxDate = isAfter(parseDate(this.maxDate))(date);
+      const isDateBeforeMinDate = this.minDate ? isBefore(parseDate(this.minDate))(date) : false;
+
+      return isDateAfterMaxDate || isDateBeforeMinDate;
+    },
+    isDateBetweenTwoDays(date) {
+      const { dateStart, dateEnd } = this.result;
+      if (!dateStart || !dateEnd) {
+        return false;
+      }
+      date = parseDate(date);
+      return isWithinInterval({ start: parseDate(dateStart), end: parseDate(dateEnd) })(date);
+    },
+    isDateSameWith(key, date) {
+      const isDateValid = flow(parseDate, isValid)(date);
+      if (!isDateValid || !this.result[key]) {
+        return false;
+      } else {
+        return isSameDay(parseDate(this.result[key]))(parseDate(date));
+      }
+    },
+    handleDateClass(date) {
+      const isDateValid = flow(parseDate, isValid)(date);
+
+      if (!isDateValid) {
         return 'disabled';
       }
 
-      let date = moment(`${year}/${month}/${day}`, 'YYYY/M/D');
-      let { dateStart, dateEnd } = this.result;
-      let minDate = moment(this.minDate, 'YYYY/M/D');
-      let maxDate = moment(this.maxDate, 'YYYY/M/D');
+      const isDateSameWithDateStart = this.isDateSameWith('dateStart', date);
+      const isDateSameWithDateEnd = this.isDateSameWith('dateEnd', date);
+      const isDateSelected = isDateSameWithDateStart || isDateSameWithDateEnd || this.isDateBetweenTwoDays(date);
 
-      let isDateSelected = date.isBetween(dateStart, dateEnd) || date.isSame(dateStart) || date.isSame(dateEnd);
-      let isDisabledDate = date.isBefore(minDate) || date.isAfter(maxDate);
       let classes = '';
-
-      if (isDisabledDate) {
-        classes += 'disabled';
-      } else {
-        classes += isDateSelected ? ' selected' : '';
-        classes += date.isSame(dateStart) ? ' start' : '';
-        classes += date.isSame(dateEnd) || !dateEnd ? ' end' : '';
-      }
+      classes += this.isDateDisabled(date) ? 'disabled' : '';
+      classes += isDateSameWithDateStart ? (this.result.dateEnd ? ' start' : ' start end') : '';
+      classes += isDateSameWithDateEnd ? ' end' : '';
+      classes += isDateSelected ? ' selected' : '';
 
       return classes;
     },
@@ -312,8 +348,8 @@ export default {
       }
       background: linear-gradient(white 30%, rgba(255, 255, 255, 0)),
         linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%,
-        radial-gradient(50% 0, farthest-side, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)),
-        radial-gradient(50% 100%, farthest-side, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 0 100%;
+        radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)),
+        radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 0 100%;
       background: linear-gradient(white 30%, rgba(255, 255, 255, 0)),
         linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%,
         radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)),

@@ -93,21 +93,21 @@ export default {
   computed: {
     totalValue() {
       let val = 0;
-      this.dataset.forEach(d => {
+      this.dataset.forEach((d) => {
         val += d.value;
       });
 
       return val;
     },
     isDrawable() {
-      return !!this.dataset.find(item => item.value > 0);
+      return !!this.dataset.find((item) => item.value > 0);
     },
     radius() {
       return (this.svgHeight * 0.7) / 2;
     },
     circleCenter() {
-      let x = (this.maxSvgWidth - this.margin.left - this.margin.right) / 2 + this.margin.left;
-      let y = (this.svgHeight - this.margin.top - this.margin.bottom) / 2 + this.margin.top;
+      const x = (this.maxSvgWidth - this.margin.left - this.margin.right) / 2 + this.margin.left;
+      const y = (this.svgHeight - this.margin.top - this.margin.bottom) / 2 + this.margin.top;
 
       return [x, y];
     },
@@ -139,11 +139,11 @@ export default {
   },
   methods: {
     formatDataset() {
-      let specialCaseKey = ['其他國家', '其他城市'];
-      let specialCase = this.dataset.filter(item => item.label.includes(specialCaseKey));
+      const specialCaseKey = ['其他國家', '其他城市'];
+      const specialCase = this.dataset.filter((item) => item.label.includes(specialCaseKey));
 
-      let allDistinct = this.dataset
-        .filter(item => !item.label.includes(specialCaseKey))
+      const allDistinct = this.dataset
+        .filter((item) => !item.label.includes(specialCaseKey))
         .sort((a, b) => b.value - a.value);
 
       if (allDistinct.length <= 10) {
@@ -151,8 +151,8 @@ export default {
         return;
       }
 
-      let topTenDistinct = allDistinct.filter((item, i) => i < 10).sort(() => Math.random() - 0.5);
-      let otherDistinct = allDistinct.filter((item, i) => i >= 10);
+      const topTenDistinct = allDistinct.filter((item, i) => i < 10).sort(() => Math.random() - 0.5);
+      const otherDistinct = allDistinct.filter((item, i) => i >= 10);
 
       if (otherDistinct.length === 1) {
         this.layoutDataset = [...topTenDistinct, ...otherDistinct, ...specialCase];
@@ -161,11 +161,11 @@ export default {
 
       let otherDistinctTotalValue = 0;
 
-      otherDistinct.forEach(d => {
+      otherDistinct.forEach((d) => {
         otherDistinctTotalValue += d.value;
       });
 
-      let otherDistinctData = {
+      const otherDistinctData = {
         label: '其他區域',
         value: otherDistinctTotalValue,
         detail: [],
@@ -176,7 +176,7 @@ export default {
       this.layoutDataset = [...topTenDistinct, otherDistinctData, ...specialCase];
     },
     formatValue(val) {
-      let percentage = Math.round((val / this.totalValue) * 100);
+      const percentage = Math.round((val / this.totalValue) * 100);
       return percentage < 1 ? '小於 1 %' : `${percentage}%`;
     },
     getTooltipContent(d) {
@@ -187,19 +187,21 @@ export default {
       const pieArea = d3.select(`#${this.id}`);
 
       // 餅 & 字 => fill
-      pieArea.selectAll('path, .labelText').style('fill', d => {
+      pieArea.selectAll('path, .labelText').style('fill', (d) => {
         return this.selectedIndex === null || d.index === this.selectedIndex ? this.colors(d.index) : 'lightgray';
       });
 
       // 線 => stroke
-      pieArea.selectAll('.line1, .line2').style('stroke', d => {
+      pieArea.selectAll('.line1, .line2').style('stroke', (d) => {
         return this.selectedIndex === null || d.index === this.selectedIndex ? this.colors(d.index) : 'lightgray';
       });
 
       pieArea.selectAll('path, .labelText, .line1, .line2').style('transition', '0.2s');
     },
     initPieChart() {
-      if (!this.isDrawable) return;
+      if (!this.isDrawable) {
+        return;
+      }
 
       d3.selectAll(`#${this.id} > *`).remove();
 
@@ -216,7 +218,7 @@ export default {
       const pie = d3
         .pie()
         .sort(null)
-        .value(d => d.value)(this.layoutDataset);
+        .value((d) => d.value)(this.layoutDataset);
 
       const tooltip = d3.select('.tooltip').style('display', 'none');
 
@@ -235,7 +237,7 @@ export default {
         .enter()
         .append('g')
         .attr('class', 'arc')
-        .on('click', sec => {
+        .on('click', (sec) => {
           this.selectedIndex = this.selectedIndex === sec.index ? null : sec.index;
         });
 
@@ -252,12 +254,10 @@ export default {
       function pieTween(b) {
         b.innerRadius = 0;
         const i = d3.interpolate({ startAngle: 0, endAngle: 0 }, b);
-        return function(t) {
-          return arc(i(t));
-        };
+        return (t) => arc(i(t));
       }
 
-      let labels = svg.append('g').attr('class', 'labels');
+      const labels = svg.append('g').attr('class', 'labels');
 
       this.labelLine = labels
         .append('g')
@@ -272,15 +272,17 @@ export default {
         .attr('class', 'line1')
         .attr('opacity', 0)
         .style('fill', 'none')
-        .style('display', d => {
-          if (!d.value) return 'none';
+        .style('display', (d) => {
+          if (!d.value) {
+            return 'none';
+          }
         })
         .attr('stroke-width', 1)
         .attr('stroke', (d, i) => this.colors(i))
-        .attr('x1', d => arc.centroid(d)[0])
-        .attr('y1', d => arc.centroid(d)[1])
-        .attr('x2', d => outerArc.centroid(d)[0])
-        .attr('y2', d => outerArc.centroid(d)[1]);
+        .attr('x1', (d) => arc.centroid(d)[0])
+        .attr('y1', (d) => arc.centroid(d)[1])
+        .attr('x2', (d) => outerArc.centroid(d)[0])
+        .attr('y2', (d) => outerArc.centroid(d)[1]);
 
       // 第二條線：outerAct 中心到 x 軸延伸
       this.labelLine
@@ -288,20 +290,22 @@ export default {
         .attr('class', 'line2')
         .attr('opacity', 0)
         .style('fill', 'none')
-        .style('display', d => {
-          if (!d.value) return 'none';
+        .style('display', (d) => {
+          if (!d.value) {
+            return 'none';
+          }
         })
         .attr('stroke-width', 1)
         .attr('stroke', (d, i) => this.colors(i))
-        .attr('x1', d => outerArc.centroid(d)[0])
-        .attr('y1', d => outerArc.centroid(d)[1])
-        .attr('x2', d => {
+        .attr('x1', (d) => outerArc.centroid(d)[0])
+        .attr('y1', (d) => outerArc.centroid(d)[1])
+        .attr('x2', (d) => {
           const position = outerArc.centroid(d)[0];
           const sign = position > 0 ? 1 : -1;
 
           return position + 30 * sign;
         })
-        .attr('y2', d => outerArc.centroid(d)[1]);
+        .attr('y2', (d) => outerArc.centroid(d)[1]);
 
       this.labelLine
         .selectAll('line')
@@ -320,26 +324,28 @@ export default {
         .enter()
         .append('text')
         .attr('class', 'labelText')
-        .text(d => {
-          let percentage = Math.round((d.value / this.totalValue) * 100);
+        .text((d) => {
+          const percentage = Math.round((d.value / this.totalValue) * 100);
           return percentage < 1 ? `${d.data.label} (小於${percentage} %)` : `${d.data.label} (${percentage}%)`;
         })
-        .style('visibility', d => {
-          if (!d.data.value) return 'hidden';
+        .style('visibility', (d) => {
+          if (!d.data.value) {
+            return 'hidden';
+          }
         })
         .attr('fill', (d, i) => this.colors(i))
-        .attr('x', function(d) {
-          let position = outerArc.centroid(d)[0];
-          let sign = position > 0 ? 1 : -1;
+        .attr('x', (d) => {
+          const position = outerArc.centroid(d)[0];
+          const sign = position > 0 ? 1 : -1;
           return position + 5 * sign;
         })
         .attr('y', function(d) {
-          let lineHeight = d3
+          const lineHeight = d3
             .select(this)
             .node()
             .getBBox().height;
 
-          let pos = outerArc.centroid(d)[1];
+          const pos = outerArc.centroid(d)[1];
 
           return pos - lineHeight / 2 + 2;
         })
@@ -348,8 +354,8 @@ export default {
 
       this.labelText
         .attr('opacity', 0)
-        .attr('text-anchor', d => {
-          let midAngle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+        .attr('text-anchor', (d) => {
+          const midAngle = d.startAngle + (d.endAngle - d.startAngle) / 2;
 
           return midAngle < Math.PI + 0.05 ? 'start' : 'end';
         })
@@ -362,7 +368,7 @@ export default {
 
       // 調整第二條線的 x2 要與 textWidth 相同
       this.labelText.nodes().forEach((d, i) => {
-        let textWidth = d3
+        const textWidth = d3
           .select(d)
           .node()
           .getBBox().width;
@@ -370,13 +376,13 @@ export default {
         this.labelLine
           .selectAll('.line2')
           .nodes()
-          .forEach((d, j) => {
+          .forEach((node, j) => {
             if (i !== j) {
               return;
             }
-            d3.select(d).attr('x2', d => {
-              let position = outerArc.centroid(d)[0];
-              let sign = position > 0 ? 1 : -1;
+            d3.select(node).attr('x2', (line) => {
+              const position = outerArc.centroid(line)[0];
+              const sign = position > 0 ? 1 : -1;
 
               return position + (textWidth + 10) * sign;
             });
@@ -386,16 +392,14 @@ export default {
     relaxLabel(group) {
       const vm = this;
 
-      group.each(function(d, j) {
-        const elA = d;
+      group.each(function(elA) {
         const textA = d3.select(this);
         const x1 = textA.attr('x');
         const y1 = textA.attr('y');
         const margin = 5;
         const textHeight1 = textA.node().getBBox().height;
 
-        group.each(function(d, j) {
-          const elB = d;
+        group.each(function(elB, i) {
           const textB = d3.select(this);
           const x2 = textB.attr('x');
           const y2 = textB.attr('y');
@@ -414,12 +418,12 @@ export default {
           // 由 textB 跟 textA 保持距離
           textB.attr('y', newPosition);
 
-          const line1 = vm.labelLine.selectAll('.line1').nodes()[j];
+          const line1 = vm.labelLine.selectAll('.line1').nodes()[i];
           d3.select(line1).attr('y2', () => {
             return Number(textB.attr('y')) + margin;
           });
 
-          const line2 = vm.labelLine.selectAll('.line2').nodes()[j];
+          const line2 = vm.labelLine.selectAll('.line2').nodes()[i];
           d3.select(line2)
             .attr('y1', Number(textB.attr('y')) + margin)
             .attr('y2', Number(textB.attr('y')) + margin);
@@ -445,11 +449,11 @@ export default {
             .split(/\s+/)
             .reverse();
           let lines = [];
-          let word;
+          let word = words.pop();
 
           let tspan = el.text(null).append('tspan');
 
-          while ((word = words.pop())) {
+          while (word) {
             lines.push(word);
             tspan.text(lines.join(' '));
 
@@ -459,6 +463,7 @@ export default {
               lines = [word];
               tspan = el.append('tspan').text(word);
             }
+            word = words.pop();
           }
 
           const tspans = el.selectAll('tspan');

@@ -6,8 +6,8 @@
       landing
       about
       experience
+      skill
       portfolio
-      contact
 
 </template>
 <script>
@@ -16,7 +16,7 @@ import Landing from '@/components/HomeLanding';
 import About from '@/components/HomeAbout';
 import Experience from '@/components/HomeExperience';
 import Portfolio from '@/components/HomePortfolio';
-import Contact from '@/components/HomeContact';
+import Skill from '@/components/HomeSkill';
 
 export default {
   components: {
@@ -25,7 +25,7 @@ export default {
     About,
     Experience,
     Portfolio,
-    Contact,
+    Skill,
   },
   name: 'home',
 };
