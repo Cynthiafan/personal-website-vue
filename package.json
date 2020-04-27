@@ -14,10 +14,12 @@
     "deploy:netlify": "yarn storybook:build && yarn build"
   },
   "dependencies": {
+    "@babel/helper-validator-identifier": "^7.9.5",
     "core-js": "^3.3.2",
     "d3": "^5.15.0",
     "date-fns": "^2.12.0",
     "lodash": "^4.17.15",
+    "raw-loader": "^4.0.1",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",
     "vue-i18n": "^8.16.0",

@@ -10,7 +10,7 @@
       svg(:id="`chart-${id}`" width="100%" :height="svgHeight")
       Slider(v-if="enabledScroll && xBoundaryPosition"
         v-model="tempNum"
-        :max="xBoundaryPosition")
+        :maxValue="xBoundaryPosition")
 </template>
 <script>
 import * as d3 from 'd3';

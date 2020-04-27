@@ -1,13 +1,12 @@
 <template lang="pug">
-  div
-    div(v-if="isDrawable" :style="`width: ${setting.width || '100%'}; margin: 0 auto; max-width: 350px;`")
-      div.heatmap-legend
-        svg(:id="`legend-${id}`")
-      div.heatmap
-        svg(:id="id" width="100%" :height="svgHeight")
-      div.no-data(v-if="!isDrawable")
-        i.icon-information
-        span 無符合資料
+div(v-if="isDrawable" :style="`width: 100%; margin: 0 auto; max-width: 350px;`")
+  div.heatmap-legend
+    svg(:id="`legend-${id}`")
+  div.heatmap
+    svg(:id="id" width="100%" :height="svgHeight")
+  div.no-data(v-if="!isDrawable")
+    i.icon-information
+    span 無符合資料
 </template>
 <script>
 import * as d3 from 'd3';
@@ -53,15 +52,6 @@ export default {
           }
         }
         return ret;
-      },
-    },
-    setting: {
-      type: Object,
-      default: () => {
-        return {
-          width: '',
-          height: 0,
-        };
       },
     },
     rectHeight: {

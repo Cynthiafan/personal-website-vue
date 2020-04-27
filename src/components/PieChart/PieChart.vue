@@ -61,7 +61,7 @@ export default {
       },
     },
     legendPosition: {
-      default: 'bottom',
+      default: 'top',
     },
     selectable: {
       type: Boolean,

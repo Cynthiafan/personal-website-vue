@@ -66,7 +66,7 @@ export default {
       type: String,
     },
     maxDate: {
-      type: [String, Date],
+      type: String,
       default: () => {
         return dfFormat(startOfYesterday());
       },
@@ -77,7 +77,6 @@ export default {
     },
     maxRangeLength: {
       type: Number,
-      default: 10,
     },
     exceedLengthErrorMsg: {
       type: String,

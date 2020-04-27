@@ -1,6 +1,6 @@
 <template lang="pug">
   div.slider
-    input.slider-bar(type="range" min="0" :max="max" v-model.number="tempNum")
+    input.slider-bar(type="range" min="0" :max="maxValue" v-model.number="tempNum")
     i.slider-icon.icon-menu(:style="{ left: `${iconPositionLeft}px` }")
 </template>
 
@@ -11,7 +11,7 @@ export default {
       type: Number,
       default: 0,
     },
-    max: {
+    maxValue: {
       type: Number,
       required: true,
     },
@@ -48,7 +48,7 @@ export default {
     setIconPosition() {
       const thumbWidth = 80;
 
-      this.iconPositionLeft = (this.value * (this.barWidth - thumbWidth)) / this.max;
+      this.iconPositionLeft = (this.value * (this.barWidth - thumbWidth)) / this.maxValue;
     },
   },
 };

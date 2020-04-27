@@ -5,7 +5,7 @@
     button(@click="throwBall" :disabled="!isBtnClickable") Throw ball
 </template>
 <script>
-import { createParabola } from '@/utils/parabola.v2';
+import { createParabola } from '@/utils/parabola.utils';
 import { cloneAndSetStyle } from '@/utils/html.utils';
 
 export default {
