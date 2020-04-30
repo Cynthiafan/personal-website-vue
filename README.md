@@ -1,34 +1,16 @@
-# tech-blog
+# Personal website
 
-## Project setup
-```
-yarn install
-```
+Deployed on Netlify, is available now.
+[Check it!](https://cynthiafan.com)
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+## Progress
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+- [ ] One-page resume homepage.
+- [x] Integrate the components I developed by [storybook](https://storybook.js.org/).
+- [ ] Integrate the tech articles and study memo by [vuepress](https://vuepress.vuejs.org/). 
 
-### Run your tests
-```
-yarn run test
-```
+## Copyright & License
+Copyright (c) 2020 Cynthia Fan. Available under the MIT License.
 
-### Lints and fixes files
-```
-yarn run lint
-```
 
-### Run your unit tests
-```
-yarn run test:unit
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
