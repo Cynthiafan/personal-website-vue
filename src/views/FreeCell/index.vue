@@ -287,7 +287,7 @@ export default {
     },
     saveMovement(m) {
       this.movement.push(m);
-      if (this.movement.length > 3) {
+      if (this.movement.length > config.undoabledStepsCount) {
         this.movement.shift();
       }
     },
@@ -297,10 +297,10 @@ export default {
       }
 
       const movement = this.movement.pop();
-      const movingCard = movement.cards.map((card) => {
+      const { cards: movedCards, from } = movement;
+      const movingCard = movedCards.map((card) => {
         return document.getElementById(card);
       });
-      const { cards, from } = movement;
       let targetPlace;
 
       switch (from.place) {
@@ -309,7 +309,7 @@ export default {
           break;
         }
         case 'sort': {
-          const type = cards[0].split('-')[0];
+          const type = movedCards[0].split('-')[0];
           targetPlace = document.getElementById(`${type}-${from.index}`);
           break;
         }
