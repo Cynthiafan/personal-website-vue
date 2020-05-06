@@ -468,7 +468,7 @@ export default {
       const isTargetACard = target.tagName === 'IMG';
       const isOneCardOnly = movingCards.length === 1;
       const targetArea = isTargetACard ? target.parentElement.dataset.area : target.dataset.area;
-      const isFromSameArea = movingCards[0].parentNode.dataset.area === targetArea;
+      const isFromSameArea = movingCards[0].parentElement.dataset.area === targetArea;
       const [movingType, movingNumber] = movingCards[0].id.split('-');
 
       const validate = {
@@ -487,13 +487,20 @@ export default {
           return !isTargetACard && isOneCardOnly && !isFromSamePosition;
         },
         cards: () => {
-          const targetColumnIndex = isTargetACard
-            ? Number(target.parentElement.id.split('-')[1])
-            : Number(target.id.split('-')[1]);
+          /* moving to bottom area has 3 situations:
+           * a. move to card
+           * b. move to column which has cards
+           * c. move to empty column
+           */
+          const isEmptyColumn = target.classList.contains('empty');
+
+          const targetColumnIndex =
+            isTargetACard || isEmptyColumn
+              ? Number(target.parentElement.id.split('-')[1])
+              : Number(target.id.split('-')[1]);
+
           const targetColumn = this.newCards[targetColumnIndex];
-
           const lastCardInTargetColumn = targetColumn.length ? targetColumn[targetColumn.length - 1] : '';
-
           const isFromSameColumn = movingCards[0].parentElement === target.parentElement;
 
           let isValidType;
