@@ -46,7 +46,7 @@ import {
   startOfMonth,
 } from 'date-fns/fp';
 import { initWeekdays, parseDate, dfFormat, formatToISOWeekday } from '@/plugins/dateFns';
-import { smoothScrollTo } from '@/utils/browser-action.utils';
+import { smoothScrollTo } from '@/utils/browser.utils';
 import { flow } from 'lodash/fp';
 
 export default {

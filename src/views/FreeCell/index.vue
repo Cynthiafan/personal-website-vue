@@ -3,7 +3,7 @@
     div.free-cell__top
 
       div.free-cell__top__free-area
-        div.free-area.free(v-for="(card, i) in freeCards" :key="i" :id="`free-${i}`")
+        div.free-area.free(v-for="(card, i) in freeCards" :key="i" :id="`free-${i}`" data-area="free")
           img.free(
             v-if="card"
             :src="cards[card]"
@@ -21,7 +21,8 @@
           v-for="group in homeCards"
           :key="group.type"
           :class="group.type"
-          :id="`${group.type}-0`")
+          :id="`${group.type}-0`"
+          data-area="home")
           img.home(
             v-for="(card,i) in group.cards"
             :key="card"
@@ -35,8 +36,9 @@
       div.free-cell__bottom__column(
         v-for="(group, i) in newCards" 
         :key="`group-${i + 1}`"
-        :id="`column-${i}`")
-        div.empty(v-if="!group.length")
+        :id="`column-${i}`"
+        data-area="cards")
+        div.empty(v-if="!group.length" data-area="cards")
         img.card(
           v-for="(card, j) in group"
           draggable="false"
@@ -64,8 +66,9 @@
 import FooterNav from './footer';
 import Popup from './popup';
 import { cards } from './image-binary';
-import { flow } from 'lodash/fp';
+import { flow, cloneDeep } from 'lodash/fp';
 import { shuffle, groupByCount } from '@/utils/array.utils';
+import { localStorageFn } from '@/utils/browser.utils';
 import { config, defaultSetting, popupSetting } from './config';
 
 export default {
@@ -78,8 +81,8 @@ export default {
       cards,
       originalCards: [],
       newCards: [],
-      freeCards: defaultSetting.freeCards, // left-top cards
-      homeCards: defaultSetting.homeCards,
+      freeCards: cloneDeep(defaultSetting.freeCards), // left-top cards
+      homeCards: cloneDeep(defaultSetting.homeCards),
       popupConfig: undefined,
       isShowPopup: false,
       clickOffset: {
@@ -90,6 +93,7 @@ export default {
       isCardsMovable: false,
       movement: [],
       isMoved: false,
+      fcLocalStorageFn: localStorageFn('fc'),
     };
   },
   computed: {
@@ -127,7 +131,7 @@ export default {
     },
   },
   created() {
-    if (localStorage.getItem('fc')) {
+    if (this.fcLocalStorageFn.getItem()) {
       this.restoreGame();
     } else {
       this.initGame();
@@ -140,135 +144,73 @@ export default {
   },
   methods: {
     showRules() {
-      this.popupConfig = popupSetting.rule;
-      this.isShowPopup = true;
+      this.setPopupStatus(popupSetting.rule);
     },
     changeCardPlace(movingCard, targetPlace, isUndo = false) {
-      if (
-        !this.isCardsMovable ||
-        movingCard[0] === targetPlace ||
-        !(
-          targetPlace.classList.contains('home') ||
-          targetPlace.classList.contains('free') ||
-          targetPlace.classList.contains('card') ||
-          targetPlace.classList.contains('empty')
-        )
-      ) {
+      if (!isUndo && !this.checkIsMovementValid(movingCard, targetPlace)) {
         return;
       }
 
-      if (
-        movingCard[0].classList.contains('card') &&
-        targetPlace.classList.contains('card') &&
-        movingCard[0].parentElement.id.split('-')[1] === targetPlace.parentElement.id.split('-')[1]
-      ) {
-        return;
-      }
+      const isTargetACard = targetPlace.tagName === 'IMG';
+      const targetArea = isTargetACard ? targetPlace.parentElement.dataset.area : targetPlace.dataset.area;
 
-      const colorGroupRed = ['H', 'D'];
-      const [targetType, targetNum] = targetPlace.id.split('-');
-      const [type, num] = movingCard[0].id.split('-');
-      const movingCardId = Array.apply(null, movingCard).map((card) => card.id);
+      const originalArea = movingCard[0].parentNode.dataset.area;
+      const movingCardIds = Array.apply(null, movingCard).map((card) => card.id);
 
       const movement = {
-        cards: movingCardId,
-        from: { place: '', index: 0 },
+        cards: movingCardIds,
+        from: { place: originalArea, index: 0 },
       };
 
-      // 同樣地方就不動
+      const action = {
+        home: {
+          moveTo: () => {
+            const targetType = targetPlace.id.split('-')[0];
+            const targetGroupIndex = this.homeCards.findIndex((group) => group.type === targetType);
+            this.homeCards[targetGroupIndex].cards.push(movingCard[0].id);
 
-      // 目標：放到整理牌堆中
-      if (targetPlace.classList.contains('home')) {
-        /* 限制：
-          1. 只能放一張
-          2. 要放在同花色
-          3. 目標牌堆的最上面一張卡數字 === 移動中的牌數字 - 1
-        */
+            if (!isUndo) {
+              this.$refs.footer.addScore(config.validMovementScore);
+            }
+          },
+          moveFrom: () => {
+            const movingType = movingCard[0].id.split('-')[0];
+            const movingGroupIndex = this.homeCards.findIndex((group) => group.type === movingType);
 
-        if (movingCard[0].classList.contains('home')) {
-          return;
-        }
+            this.homeCards[movingGroupIndex].cards.pop();
+            movement.from.index = movingGroupIndex;
+          },
+        },
+        free: {
+          moveTo: () => {
+            const freeAreaIndex = Number(targetPlace.id.split('-')[1]);
+            this.$set(this.freeCards, freeAreaIndex, movingCard[0].id);
+          },
+          moveFrom: () => {
+            const freeAreaIndex = Number(movingCard[0].parentElement.id.split('-')[1]);
+            this.$set(this.freeCards, freeAreaIndex, '');
 
-        const isOnlyOneCard = movingCard.length === 1;
-        const isContinuousNum = Number(num) === Number(targetNum) + 1;
-        const hasSameType = type === targetType;
+            movement.from.index = freeAreaIndex;
+          },
+        },
+        cards: {
+          moveTo: () => {
+            const targetIndex = Number(targetPlace.parentElement.id.split('-')[1]);
 
-        if ((!isOnlyOneCard || !isContinuousNum || !hasSameType) && !isUndo) {
-          return;
-        }
+            this.$set(this.newCards, targetIndex, [...this.newCards[targetIndex], ...movingCardIds]);
+          },
+          moveFrom: () => {
+            const columnIndex = Number(movingCard[0].parentElement.id.split('-')[1]);
+            const startIndex = this.newCards[columnIndex].findIndex((card) => card === movingCard[0].id);
+            this.newCards[columnIndex].splice(startIndex);
 
-        const targetGroupIndex = this.homeCards.findIndex((group) => group.type === targetType);
-        this.homeCards[targetGroupIndex].cards.push(movingCard[0].id);
+            movement.from.index = columnIndex;
+          },
+        },
+      };
 
-        // TODO: 如果上一步是 Undo 而且又做了同件事，則不再加分
-        this.$refs.footer.addScore(250);
-      }
-
-      // 目標：放到暫放區
-      if (targetPlace.classList.contains('free')) {
-        /* 限制：
-          1. 只能放一張
-          2. 目標位置不能有牌
-        */
-
-        const targetIndex = Number(targetNum);
-        const isTargetPlaceEmpty = !this.freeCards[targetIndex];
-        const isOnlyOneCard = movingCard.length === 1;
-
-        if ((!isOnlyOneCard || !isTargetPlaceEmpty) && !isUndo) {
-          return;
-        }
-
-        this.$set(this.freeCards, targetIndex, movingCard[0].id);
-      }
-
-      // 目標：放到下方牌堆中
-      if (targetPlace.classList.contains('card')) {
-        /* 限制：
-          1. 要不同顏色
-          2. 目標位置的數字要比拖曳的第一張數字大 1
-        */
-
-        const isDifferentColor = colorGroupRed.includes(type) !== colorGroupRed.includes(targetType);
-        const isContinuousNum = Number(num) === Number(targetNum) - 1;
-
-        if ((!isContinuousNum || !isDifferentColor) && !isUndo) {
-          return;
-        }
-
-        const targetIndex = Number(targetPlace.parentElement.id.split('-')[1]);
-        this.$set(this.newCards, targetIndex, [...this.newCards[targetIndex], ...movingCardId]);
-      }
-
-      if (targetPlace.classList.contains('empty')) {
-        const columnIndex = Number(targetPlace.parentElement.id.split('-')[1]);
-        this.$set(this.newCards, columnIndex, movingCardId);
-      }
-
-      if (movingCard[0].classList.contains('free')) {
-        const movingIndex = Number(movingCard[0].parentElement.id.split('-')[1]);
-        this.$set(this.freeCards, movingIndex, '');
-
-        movement.from.place = 'free';
-        movement.from.index = movingIndex;
-      }
-
-      if (movingCard[0].classList.contains('home')) {
-        const groupIndex = this.homeCards.findIndex((group) => group.type === type);
-        this.homeCards[groupIndex].cards.pop();
-
-        movement.from.place = 'home';
-        movement.from.index = groupIndex;
-      }
-
-      if (movingCard[0].classList.contains('card')) {
-        const columnIndex = Number(movingCard[0].parentElement.id.split('-')[1]);
-        const startIndex = this.newCards[columnIndex].findIndex((card) => card === movingCard[0].id);
-        this.newCards[columnIndex].splice(startIndex);
-
-        movement.from.place = 'card';
-        movement.from.index = columnIndex;
-      }
+      action[targetArea].moveTo();
+      action[originalArea].moveFrom();
 
       if (!isUndo) {
         this.saveMovement(movement);
@@ -281,9 +223,9 @@ export default {
         home: this.homeCards,
         card: this.newCards,
         movement: this.movement,
-        oriCard: this.originalCards,
+        oriCard: cloneDeep(this.originalCards),
       };
-      localStorage.setItem('fc', JSON.stringify(all));
+      this.fcLocalStorageFn.setItem(all);
     },
     saveMovement(m) {
       this.movement.push(m);
@@ -313,10 +255,17 @@ export default {
           targetPlace = document.getElementById(`${type}-${from.index}`);
           break;
         }
-        case 'card': {
+        case 'cards': {
           targetPlace =
             document.getElementById(`column-${from.index}`).lastChild ||
             document.getElementById(`column-${from.index}`);
+          break;
+        }
+        case 'home': {
+          const type = movedCards[0].split('-')[0];
+          targetPlace =
+            document.getElementById(`${type}-${from.index}`).lastChild ||
+            document.getElementById(`${type}-${from.index}`);
         }
       }
 
@@ -352,7 +301,7 @@ export default {
       }, 2000);
     },
     dragEnd(e) {
-      if (!this.draggingCards.length) {
+      if (!this.draggingCards.length || !this.isCardsMovable) {
         return;
       }
 
@@ -432,12 +381,10 @@ export default {
 
       if (isWin) {
         this.$refs.footer.pauseTimer();
-        this.popupConfig = popupSetting.complete;
-        this.isShowPopup = true;
+        this.setPopupStatus(popupSetting.complete);
       }
     },
     checkIsDraggable() {
-      const colorGroupRed = ['H', 'D'];
       let hasWrong = false;
 
       this.draggingCards.forEach((card, i) => {
@@ -446,14 +393,10 @@ export default {
         if (i !== this.draggingCards.length - 1) {
           const [nextType, nextNum] = this.draggingCards[i + 1].id.split('-');
 
-          // 不是連續數字無法移動
-          if (Number(nextNum) !== Number(num) - 1) {
-            hasWrong = true;
-            return;
-          }
+          const isContinuousNumber = Number(nextNum) !== Number(num) - 1;
+          const isSameColor = config.redTypes.includes(type) === config.redTypes.includes(nextType);
 
-          // 相同顏色無法移動
-          if (colorGroupRed.includes(type) === colorGroupRed.includes(nextType)) {
+          if (isContinuousNumber || isSameColor) {
             hasWrong = true;
             return;
           }
@@ -463,46 +406,47 @@ export default {
       this.isCardsMovable = hasWrong ? false : true;
     },
     fireAction(type) {
-      if (type === 'init' || type === 'restart') {
-        this.popupConfig = popupSetting[type];
-        this.isShowPopup = true;
-      }
-      if (type === 'hint') {
-        this.giveHint();
-      }
-      if (type === 'undo') {
-        this.undoMovement();
-      }
+      const actions = {
+        init: () => {
+          this.setPopupStatus(popupSetting[type]);
+        },
+        restart: () => {
+          this.setPopupStatus(popupSetting[type]);
+        },
+        hint: this.giveHint,
+        undo: this.undoMovement,
+      };
+
+      actions[type]();
     },
     initGame() {
       const groupCardsFn = groupByCount(config.initCardsGroupCount);
       const initialedCards = flow(shuffle, groupCardsFn)([...this.allCards]);
 
       this.newCards = initialedCards;
-      this.originalCards = initialedCards;
+      this.originalCards = cloneDeep(initialedCards);
 
       this.initFreeAndHomeCards();
-      this.saveGame();
     },
     resetCards() {
-      const copy = JSON.parse(JSON.stringify(this.originalCards));
+      const copy = cloneDeep(this.originalCards);
       copy.forEach((column, i) => {
         this.$set(this.newCards, i, column);
       });
 
-      this.movement = [];
       this.initFreeAndHomeCards();
     },
     initFreeAndHomeCards() {
       const { freeCards, homeCards } = defaultSetting;
 
-      this.freeCards = freeCards;
-      this.homeCards = homeCards;
+      this.freeCards = cloneDeep(freeCards);
+      this.homeCards = cloneDeep(homeCards);
       this.isMoved = false;
       this.isShowPopup = false;
+      this.movement = [];
     },
     restoreGame() {
-      const { free, home, card, movement, oriCard } = JSON.parse(localStorage.getItem('fc'));
+      const { free, home, card, movement, oriCard } = this.fcLocalStorageFn.getItem();
 
       this.freeCards = [...free];
       this.homeCards = [...home];
@@ -515,6 +459,59 @@ export default {
       });
 
       this.$nextTick(() => this.checkIsWin());
+    },
+    setPopupStatus(setting, isShow = true) {
+      this.popupConfig = setting;
+      this.isShowPopup = isShow;
+    },
+    checkIsMovementValid(movingCards, target) {
+      const isTargetACard = target.tagName === 'IMG';
+      const isOneCardOnly = movingCards.length === 1;
+      const targetArea = isTargetACard ? target.parentElement.dataset.area : target.dataset.area;
+      const isFromSameArea = movingCards[0].parentNode.dataset.area === targetArea;
+      const [movingType, movingNumber] = movingCards[0].id.split('-');
+
+      const validate = {
+        home: () => {
+          const [targetType, targetNumber] = target.id.split('-');
+
+          const isSameType = targetType === movingType;
+          const isValidNumber = Number(targetNumber) === Number(movingNumber) - 1;
+
+          return isOneCardOnly && isSameType && isValidNumber && !isFromSameArea;
+        },
+        free: () => {
+          const isFromSamePosition =
+            isFromSameArea && this.freeCards[Number(target.id.split('-')[1])] === movingCards[0].id;
+
+          return !isTargetACard && isOneCardOnly && !isFromSamePosition;
+        },
+        cards: () => {
+          const targetColumnIndex = isTargetACard
+            ? Number(target.parentElement.id.split('-')[1])
+            : Number(target.id.split('-')[1]);
+          const targetColumn = this.newCards[targetColumnIndex];
+
+          const lastCardInTargetColumn = targetColumn.length ? targetColumn[targetColumn.length - 1] : '';
+
+          const isFromSameColumn = movingCards[0].parentElement === target.parentElement;
+
+          let isValidType;
+          let isValidNumber;
+
+          if (lastCardInTargetColumn) {
+            const [targetType, targetNumber] = lastCardInTargetColumn.split('-');
+            isValidType = config.redTypes.includes(targetType) !== config.redTypes.includes(movingType);
+            isValidNumber = Number(targetNumber) === Number(movingNumber) + 1;
+          }
+
+          return lastCardInTargetColumn ? isValidType && isValidNumber && !isFromSameColumn : !isFromSameColumn;
+        },
+      };
+
+      const validArea = Object.keys(validate);
+
+      return validArea.includes(targetArea) ? validate[targetArea]() : false;
     },
   },
 };
