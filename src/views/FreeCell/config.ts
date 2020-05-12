@@ -4,6 +4,8 @@ export const config: FreeCellSetting = {
   undoabledStepsCount: 3,
   cardTypes: ['S', 'H', 'D', 'C'],
   cardMaxNum: 13,
+  redTypes: ['H', 'D'],
+  validMovementScore: 250,
 };
 
 const homeCards = config.cardTypes.map((type) => ({ type, cards: [] }));
@@ -68,6 +70,8 @@ interface FreeCellSetting {
   undoabledStepsCount: number,
   cardTypes: string[],
   cardMaxNum: number,
+  redTypes: string[],
+  validMovementScore: number,
 }
 
 interface CardDefaultSetting {
