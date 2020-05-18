@@ -21,6 +21,7 @@
           div.picker__calendar__content__week
             div.day(
               v-for="(day, i) in daysInfo(date.year, date.month)" :key="i"
+              :data-date="day? `${date.year}/${date.month}/${day}` : ''"
               :class="handleDateClass(`${date.year}/${date.month}/${day}`)"
               @click="handleDateRange(`${date.year}/${date.month}/${day}`)") {{ day }}
       div.btn
@@ -45,7 +46,7 @@ import {
   subMonths,
   startOfMonth,
 } from 'date-fns/fp';
-import { initWeekdays, parseDate, dfFormat, formatToISOWeekday } from '@/plugins/dateFns';
+import { initWeekdays, parseDate, dfFormat, formatToISOWeekday } from '@/utils/dateFns.utils';
 import { smoothScrollTo } from '@/utils/browser.utils';
 import { flow } from 'lodash/fp';
 
@@ -208,7 +209,7 @@ export default {
     },
     isDateBetweenTwoDays(date) {
       const { dateStart, dateEnd } = this.result;
-      if (!dateStart || !dateEnd) {
+      if (!dateStart || !dateEnd || !date) {
         return false;
       }
       date = parseDate(date);
