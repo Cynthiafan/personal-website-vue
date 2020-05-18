@@ -46,7 +46,7 @@ import {
   subMonths,
   startOfMonth,
 } from 'date-fns/fp';
-import { initWeekdays, parseDate, dfFormat, formatToISOWeekday } from '@/plugins/dateFns';
+import { initWeekdays, parseDate, dfFormat, formatToISOWeekday } from '@/utils/dateFns.utils';
 import { smoothScrollTo } from '@/utils/browser.utils';
 import { flow } from 'lodash/fp';
 

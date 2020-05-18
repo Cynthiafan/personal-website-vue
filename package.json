@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@babel/helper-validator-identifier": "^7.9.5",
+    "@types/d3": "^5.7.2",
     "@types/lodash": "^4.14.150",
     "core-js": "^3.3.2",
     "d3": "^5.15.0",

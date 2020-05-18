@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 import DateRangePicker from './DateRangePicker.vue';
 import { subMonths } from 'date-fns/fp';
 import { startOfYesterday } from 'date-fns';
-import { dfFormat } from '@/plugins/dateFns';
+import { dfFormat } from '@/utils/dateFns.utils';
 import { flow } from 'lodash/fp';
 
 const wrapper = mount(DateRangePicker);

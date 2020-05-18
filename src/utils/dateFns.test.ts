@@ -1,4 +1,4 @@
-import * as df from './dateFns';
+import * as df from './dateFns.utils';
 
 describe('date-fns', () => {
 

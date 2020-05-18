@@ -10,7 +10,7 @@ div(v-if="isDrawable" :style="`width: 100%; margin: 0 auto; max-width: 350px;`")
 </template>
 <script>
 import * as d3 from 'd3';
-import { initWeekdays, parseHour } from '@/plugins/dateFns';
+import { initWeekdays, parseHour } from '@/utils/dateFns.utils';
 import { addDays } from 'date-fns';
 
 export default {

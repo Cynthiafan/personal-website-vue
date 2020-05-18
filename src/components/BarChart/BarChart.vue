@@ -77,7 +77,7 @@ export default {
       ],
     },
     colors: {
-      type: [Array, Function],
+      type: Array,
       default: () => {
         return createColorsFunc();
       },
