@@ -9,8 +9,8 @@ export default new Vuex.Store({
       { path: '#about', text: 'About' },
       { path: '#experience', text: 'Experience' },
       { path: '#skill', text: 'Skill' },
-      { path: `/storybook/index.html`, text: 'Portfolio', isStatic: true },
-      { path: '#techBlog', text: 'Blog' },
+      { path: '#portfolio', text: 'Portfolio' },
+      { path: `/storybook/index.html`, text: 'Blog', isStatic: true },
     ],
     experience: [
       {

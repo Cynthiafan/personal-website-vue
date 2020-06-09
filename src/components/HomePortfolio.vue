@@ -1,3 +1,3 @@
 <template lang="pug">
-  section.portfolio
+  section#portfolio
 </template>

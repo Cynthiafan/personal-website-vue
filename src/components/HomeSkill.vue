@@ -1,5 +1,5 @@
 <template lang="pug">
-  section.skill Skill
+  section#skill Skill
 </template>
 
 <script>

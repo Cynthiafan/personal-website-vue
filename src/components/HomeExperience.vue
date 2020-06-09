@@ -1,5 +1,5 @@
 <template lang="pug">
-  section.experience
+  section#experience
     div.block-title Where I've Worked
     div.flex-between-center
       ul

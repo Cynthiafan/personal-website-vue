@@ -5,10 +5,25 @@
       a(v-for="block in $store.state.blocks" 
         :key="block.id"
         :href="`${block.path}`"
-        :target="block.isStatic ? '_blank': '_self'") {{ block.text }}
+        :target="block.isStatic ? '_blank': '_self'"
+        @click.prevent="scrollToSection") {{ block.text }}
 </template>
 <script>
-export default {};
+export default {
+  methods: {
+    scrollToSection(e) {
+      const sectionId = e.target.hash;
+
+      if (sectionId) {
+        const targetSection = document.querySelector(sectionId);
+        targetSection.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        const url = e.target.href;
+        window.open(url, '_blank');
+      }
+    },
+  },
+};
 </script>
 <style lang="scss" scoped>
 .navigation {

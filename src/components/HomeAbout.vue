@@ -1,7 +1,7 @@
 <template lang="pug">
-  section.about
+  section#about
     h3.block-title About me
-    button.primary.s Download Resume
+    a.primary.s(download="Frontend_Cynthia" href="/resume/en_202005.pdf") Download Resume
 </template>
 <script>
 import PieChart from '@/components/PieChart/PieChart';
