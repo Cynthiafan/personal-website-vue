@@ -1,5 +1,5 @@
 {
-  "name": "tech-blog",
+  "name": "cynthia-personal-website",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -20,7 +20,10 @@
     "core-js": "^3.3.2",
     "d3": "^5.15.0",
     "date-fns": "^2.12.0",
+    "fs": "0.0.1-security",
+    "glob": "^7.1.6",
     "lodash": "^4.17.15",
+    "markdown-it-meta": "0.0.1",
     "raw-loader": "^4.0.1",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",
@@ -55,6 +58,6 @@
     "typescript": "~3.7.5",
     "vue-cli-plugin-storybook": "~1.2.1",
     "vue-template-compiler": "^2.6.10",
-    "vuepress": "^1.2.0"
+    "vuepress": "^1.5.0"
   }
 }
