@@ -1,55 +1,40 @@
-.flex-between-center {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+
+/* --- White Spaces --- */
+.white-space-10 {
+  padding-bottom: 10px; 
 }
 
-.flex-center-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.white-space-20 {
+  padding-bottom: 20px; 
 }
 
-.flex-row {
-  flex-direction: row;
+.white-space-30 {
+  padding-bottom: 30px; 
 }
 
-.flex-column {
-  flex-direction: column;
+.white-space-40 {
+  padding-bottom: 40px; 
 }
 
-.block-title {
-  font-size: 28px;
-  font-weight: bold;
-  font-family: $font-serif;
-  color: $color-blockTitle;
-  letter-spacing: 2px;
+.white-space-50 {
+  padding-bottom: 50px; 
 }
 
-.flex {
-  display: flex;
-  &.j-center {
-    justify-content: center;
-  }
-  &.j-start {
-    justify-content: flex-start;
-  }
-  &.j-end {
-    justify-content: flex-end;
-  }
-  &.a-center {
-    align-items: center;
-  }
-  &.a-start {
-    align-items: flex-start;
-  }
-  &.a-end {
-    align-items: flex-end;
-  }
-  &.d-row {
-    flex-direction: row;
-  }
-  &.d-column {
-    flex-direction: column;
-  }
+.white-space-60 {
+  padding-bottom: 60px; 
+}
+
+.white-space-70 {
+  padding-bottom: 70px; 
+}
+/* --- End White Spaces --- */
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
 }

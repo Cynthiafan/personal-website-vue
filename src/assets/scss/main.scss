@@ -1,12 +1,591 @@
 // Variables
 @import './variables/colors.scss';
-@import './variables/fonts.scss';
 @import './variables/z-index.scss';
 
 // Components
 @import './components/buttons.scss';
 
-@import './animate';
 @import './common';
+@import './animate';
 @import './font';
 @import './mixin';
+
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index.scss';
+
+
+/* ------------------------------------------------------------
+2. General Styles
+------------------------------------------------------------ */
+
+
+body {
+  background-color: $color-body-bg;
+  background: $color-body-gradient;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  font-size: 15px;
+  font-family: 'Poppins', Helvetica, sans-serif;
+  line-height: 1.65em;
+  overflow: hidden;
+  color: #d5d5d5;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-position: 50% 50%;
+  background-size: cover;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #eee;
+  font-family: 'Poppins', Helvetica, sans-serif;
+  font-weight: 600;
+}
+
+h1 {
+    font-size: 32px;
+}
+h2 {
+    font-size: 27px;
+}
+h3 {
+    font-size: 21px;
+}
+h4 {
+    font-size: 18px;
+}
+h5 {
+    font-size: 16px;
+}
+h6 {
+    font-size: 14px;
+}
+
+a {
+  transition: all 0.3s ease-in-out;
+  &:active,
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+/* ------------------------------------------------------------
+5. Page Content
+------------------------------------------------------------ */
+
+
+.animated-sections {
+  position: relative;
+  height: 100%;
+  -webkit-perspective: 1500px;
+  -moz-perspective: 1500px;
+  perspective: 1500px;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.animated-section {
+  position: absolute;
+  background-color: #222;
+  height: 100%;
+  width: 100%;
+  border-radius: 30px;
+  padding: 60px;
+  overflow: auto;
+  z-index: 999;
+  // transform: translate3d(0,0,0);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-position: 50% 50%;
+  background-size: cover;
+}
+
+.animated-section {
+  opacity: 1;
+  overflow: auto;
+  visibility: visible;
+  z-index: 99;
+  &.scroll-lock {
+    overflow: hidden;
+  }
+}
+
+.page-title {
+  display: inline-block;
+  position: relative;
+  padding-right: 25px;
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+}
+
+.page-title h2 {
+  position: relative;
+  font-size: 32px;
+  z-index: 1;
+}
+
+.page-title h2 span {
+  color: #0ba376;
+}
+
+.page-title:after {
+  position: absolute;
+  opacity: 0.45;
+  top: 10px;
+  right: 0;
+  content: '';
+  height: 30px;
+  width: 50px;
+  background-image: -webkit-repeating-radial-gradient(center center, #0ba376, #0ba376 1px, transparent 0px, transparent 100%);
+  background-image: -moz-repeating-radial-gradient(center center, #0ba376, #0ba376 1px, transparent 0px, transparent 100%);
+  background-image: -ms-repeating-radial-gradient(center center, #0ba376, #0ba376 1px, transparent 0px, transparent 100%);
+  -webkit-background-size: 6px 6px;
+  -moz-background-size: 6px 6px;
+  background-size: 6px 6px;
+  z-index: 0;
+}
+
+
+/* ------------------------------------------------------------
+6. Elements
+------------------------------------------------------------ */
+.block-title {
+  display: inline-block;
+  position: relative;
+  padding-right: 12px;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.block-title h3 {
+  position: relative;
+  font-size: 21px;
+  z-index: 1;
+}
+
+.block-title h3 span {
+  color: #0ba376;
+}
+
+.block-title:after {
+  position: absolute;
+  opacity: 0.45;
+  top: 10px;
+  right: 0;
+  content: '';
+  height: 20px;
+  width: 30px;
+  background-image: -webkit-repeating-radial-gradient(center center, #0ba376, #0ba376 1px, transparent 0px, transparent 100%);
+  background-image: -moz-repeating-radial-gradient(center center, #0ba376, #0ba376 1px, transparent 0px, transparent 100%);
+  background-image: -ms-repeating-radial-gradient(center center, #0ba376, #0ba376 1px, transparent 0px, transparent 100%);
+  -webkit-background-size: 6px 6px;
+  -moz-background-size: 6px 6px;
+  background-size: 6px 6px;
+  z-index: 0;
+}
+
+
+/* --- Info block with Icon --- */
+.info-block-w-icon {
+  margin-bottom: 25px;
+}
+
+.info-block-w-icon .ci-text h4 {
+  margin: 5px 0;
+}
+
+.info-block-w-icon .ci-text p {
+    font-size: .95em;
+}
+
+.info-block-w-icon .ci-icon {
+  display: table-cell;
+  width: 54px;
+  padding-right: 25px;
+}
+
+.info-block-w-icon i {
+  position: relative;
+  font-size: 42px;
+  color: #0ba376;
+  opacity: .7;
+}
+/* --- End Info block with Icon --- */
+
+/* --- Info Block with Borders --- */
+.lm-info-block {
+  position: relative;
+  text-align: center;
+  width: 100%;
+  display: block;
+  margin: 0 0 15px 0;
+  background-color: #333;
+  padding: 20px 10px;
+  border: 1px solid #444;
+  box-shadow: none;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+}
+
+.lm-info-block i {
+  position: relative;
+  font-size: 33px;
+  color: #0ba376;
+  z-index: 1;
+}
+
+.lm-info-block h4 {
+  font-size: 15px;
+  margin-top: 8px;
+}
+
+.lm-info-block .lm-info-block-value {
+  font-size: 30px;
+  line-height: 30px;
+  font-weight: 400;
+  display: block;
+  margin: 10px 0;
+  color: #0ba376;
+}
+
+
+.lm-info-block .lm-info-block-value:empty {
+  margin: 0;
+}
+/* --- End of Info Block with Borders --- */
+
+/* --- Sliders Nav --- */
+.testimonials.owl-carousel .owl-nav,
+.clients.owl-carousel .owl-nav {
+  position: absolute;
+  text-align: right;
+  right: 0;
+  top: -52px;
+}
+
+.testimonials.owl-carousel .owl-nav .owl-prev,
+.testimonials.owl-carousel .owl-nav .owl-next,
+.clients.owl-carousel .owl-nav .owl-prev,
+.clients.owl-carousel .owl-nav .owl-next {
+  position: relative;
+  display: inline-block;
+  background-color: #444;
+  border: 1px solid #444;
+  border-radius: 5px;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  font-family: "Font Awesome 5 Free";
+  font-size: 11px;
+  font-weight: 900;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  color: #d5d5d5;
+}
+
+.testimonials.owl-carousel .owl-nav .owl-prev,
+.clients.owl-carousel .owl-nav .owl-prev {
+    margin-right: 3px;
+}
+
+.testimonials.owl-carousel .owl-nav .owl-prev:before,
+.testimonials.owl-carousel .owl-nav .owl-next:before,
+.clients.owl-carousel .owl-nav .owl-prev:before,
+.clients.owl-carousel .owl-nav .owl-next:before {
+  position: relative;
+  margin: 2px;
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+  text-align: center;
+  display: block;
+  cursor: pointer;
+  color: inherit;
+  z-index: 1;
+}
+
+.testimonials.owl-carousel .owl-nav .owl-prev:before,
+.clients.owl-carousel .owl-nav .owl-prev:before {
+    content: "\f053";
+}
+
+.testimonials.owl-carousel .owl-nav .owl-next:before,
+.clients.owl-carousel .owl-nav .owl-next:before {
+    content: "\f054";
+}
+
+.testimonials.owl-carousel .owl-nav .owl-prev:hover,
+.testimonials.owl-carousel .owl-nav .owl-next:hover,
+.clients.owl-carousel .owl-nav .owl-prev:hover,
+.clients.owl-carousel .owl-nav .owl-next:hover {
+    background-color: #0ba376;
+    border-color: #0ba376;
+    color: #fff;
+}
+/* --- End of Sliders Nav --- */
+
+
+
+/* --- Skills --- */
+
+
+/* Animate skills on subpage load */
+.pt-page .skills-second-style .skill-percentage,
+.pt-page .skills-second-style .skill-value {
+  transition: all 2s ease-in-out;
+}
+.js .subpages:not(.one-page-layout) .pt-page:not(.pt-page-current) .skills-second-style .skill-percentage {
+  width: 0 !important;
+}
+
+.js .subpages:not(.one-page-layout) .pt-page:not(.pt-page-current) .skills-second-style .skill-value {
+  left: 26px !important;
+}
+/* /Skills Second Style */
+
+/* --- End of Skills --- */
+
+/* --- Knowledges --- */
+.knowledges {
+  list-style: none;
+}
+
+.knowledges li {
+  display: inline-block;
+  background-color: #0ba376;
+  border-radius: 3px;
+  color: #fff;
+  padding: 1px 10px;
+  margin: 3px 2px;
+  font-size: 13px;
+}
+/* --- End of Knowledges --- */
+
+.map {
+  width: 100%;
+  height: 140px;
+  margin: 0 0 35px;
+}
+
+
+/* ------------------------------------------------------------
+8. Media Queries
+------------------------------------------------------------ */
+
+
+@media only screen and (max-width: 1024px) {
+  .header {
+    position: absolute;
+    width: 100%;
+    max-width: 330px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #444;
+    z-index: 99;
+    padding: 30px 30px 10px 30px;
+    text-align: center;
+    opacity: 1;
+    visibility: visible;
+    overflow: auto;
+    -webkit-transition: all .25s ease-in-out;
+    -moz-transition: all .25s ease-in-out;
+    -o-transition: all .25s ease-in-out;
+    -ms-transition: all .25s ease-in-out;
+    transition: all .25s ease-in-out;
+  }
+
+  .header .copyrights {
+    right: 0;
+    width: 100%;
+    position: relative;
+    margin-top: 30px;
+  }
+
+
+
+  .animated-section,
+  .single-page-content {
+    border-radius: 0;
+    overflow: auto !important;
+  }
+
+  .header-titles h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+
+  .header-titles h4 {
+    font-size: 17px;
+  }
+
+  .header-photo {
+    max-width: 130px;
+    margin-bottom: 25px;
+  }
+}
+
+
+@media only screen and (max-width: 768px) {
+  .portfolio-grid figure {
+    width: 50%;
+  }
+
+  .blog-post-content {
+    padding: 0;
+    margin: 30px 0 0;
+  }
+
+  .blog-masonry.two-columns .item,
+  .blog-masonry.three-columns .item {
+    width: 100%;
+  }
+
+  .portfolio-grid figure,
+  .portfolio-grid.three-columns figure {
+    width: 50%;
+  }
+
+  .portfolio-grid.four-columns figure,
+  .portfolio-grid.five-columns figure {
+    width: 33.3333333%;
+  }
+
+  .page-portfolio-loaded .portfolio-page-wrapper {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .portfolio-page-carousel .owl-nav .owl-prev {
+    margin-left: 0;
+  }
+
+  .portfolio-page-carousel .owl-nav .owl-next {
+    margin-right: 0;
+  }
+
+  .portfolio-page-carousel .owl-nav .owl-prev,
+  .portfolio-page-carousel .owl-nav .owl-next {
+    background-color: rgba(255,255,255,.55);
+  }
+
+}
+
+
+@media only screen and (max-width: 480px) {
+  .section-title-block.first-style .section-description {
+    margin: 7px 0 0;
+    width: 100%;
+  }
+
+  .timeline-second-style .timeline-item {
+    position: relative;
+    display: block;
+  }
+
+  .timeline-second-style .left-part {
+    width: 100%;
+    display: block;
+    padding-left: 25px;
+    min-height: 100%;
+    text-align: left;
+  }
+
+  .timeline-second-style .divider {
+    left: 0;
+  }
+
+  .timeline-second-style .right-part {
+    width: 100%;
+    display: block;
+    padding-left: 25px;
+    padding-right: 0;
+  }
+
+
+  .controls.two-columns .right-column,
+  .controls.two-columns .left-column {
+    float: none;
+    margin: 0;
+    width: 100%;
+  }
+}
+
+/* ============================================================================= 
+10. Updates
+============================================================================= */
+
+/* v1.1 */
+
+
+.title-block {
+  position: relative;
+  text-align: center;
+}
+
+.title-block h2 {
+  color: #f5f5f5;
+  font-size: 60px;
+  line-height: 74px;
+  margin: 0;
+  text-align: center;
+}
+
+.title-block .sp-subtitle {
+  color: #aaa;
+  font-size: 21px;
+  font-weight: 300;
+  margin: 5px 0;
+  text-align: center;
+}
+
+.text-rotation {
+  display: block;
+  width: 100%;
+  position: relative;
+}
+
+.start-page .mask {
+  content: '';
+  position: absolute;
+  height: 100%;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(10,10,10,0.45);
+}
+
+
+@media only screen and (max-width: 1024px) {
+ .lm-animated-bg {
+    display: none;
+ }
+
+ .title-block h2 {
+    font-size: 48px;
+    line-height: 56px;
+    margin: 0 0 10px;
+    text-align: center;
+  }
+
+  .title-block .sp-subtitle {
+    font-size: 18px;
+  }
+}
+

@@ -1,15 +1,24 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import { RouterOptions, RouteConfig } from 'vue-router';
-import { lazyLoading } from '@/utils/router.utils';
+import { lazyLoading, fetchComponent } from '@/utils/router.utils';
+import store from '@/store';
+
+const blocks = store.getters.blocks;
+const homepageChildren = blocks.map((block: any) => {
+  return {
+    path: block.path.replace('/', ''),
+    name: block.text,
+    component: fetchComponent(block.componentName, 'HomepageTemplate'),
+  };
+});
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'home',
     component: lazyLoading('Home'),
+    children: homepageChildren,
   },
   {
     path: '/f2e-challenge/free-cell',
