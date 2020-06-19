@@ -10,21 +10,30 @@
 
           Block
             h3(slot="title") Experience
-            Timeline(slot="content" :list="$store.state.experience")
+            Timeline(slot="content" :list="$store.state.experience" :page="page")
+          
+          div.white-space-50
+
+          Block
+            h3(slot="title") Education
+            Timeline(slot="content" :list="$store.state.education" :page="page")
+
+          div.white-space-50
+
 
         div.col-xs-12.col-sm-5
 
           Block
             h3(slot="title") Coding 
               span Skills
-            SkillBar(slot="content" :skills="$store.state.skills")
+            SkillBar(slot="content" :skills="$store.state.skills" :page="page")
 
           div.white-space-10
 
           Block
             h3(slot="title") Language 
               span Skills
-            SkillBar(slot="content" :skills="$store.state.languages")
+            SkillBar(slot="content" :skills="$store.state.languages" :page="page")
 
           div.white-space-10
 
@@ -44,7 +53,7 @@
       div.row
 
         div.col-xs-12.col-sm-6
-          Certificates(:list="$store.state.certificates")
+          Certificates(:list="$store.state.certificates" :page="page")
 
     </div>
   </section>
@@ -61,6 +70,11 @@ export default {
     SkillBar,
     Timeline,
     Block,
+  },
+  data() {
+    return {
+      page: 'resume',
+    };
   },
 };
 </script>

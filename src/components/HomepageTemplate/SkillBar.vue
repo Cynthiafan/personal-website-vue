@@ -3,8 +3,8 @@ div
   div.skills-info.skills-second-style
     div(v-for="item in skills" :key="item.label")
       div.skill.clearfix
-        h4 {{ item.label }}
-        div.skill-value {{ item.text || item.value }}
+        h4 {{ $_handleI18n(item, page, 'label') }}
+        div.skill-value {{ item.text ? $_handleI18n(item, page, 'text') : item.value }}
       div.skill-container
         div.skill-percentage(:style="`width: ${item.value}`")
 </template>
@@ -14,6 +14,7 @@ export default {
     skills: {
       type: Array,
     },
+    page: String,
   },
 };
 </script>

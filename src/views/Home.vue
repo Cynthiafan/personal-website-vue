@@ -29,6 +29,7 @@
 import Preloader from '@/components/HomepageTemplate/Preloader';
 import NavHeader from '@/components/HomepageTemplate/NavHeader';
 import ArrowsNav from '@/components/HomepageTemplate/ArrowsNav';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -42,13 +43,20 @@ export default {
       isMenuOpen: false,
     };
   },
+  computed: {
+    ...mapGetters(['locale']),
+  },
+  watch: {
+    locale() {
+      this.closeMenu();
+    },
+  },
   mounted() {
     window.addEventListener('load', this.closePreloader);
   },
   beforeRouteUpdate(to, from, next) {
-    if (this.isMenuOpen) {
-      this.isMenuOpen = false;
-    }
+    this.closeMenu();
+
     next();
   },
   beforeDestroy() {
@@ -57,6 +65,11 @@ export default {
   methods: {
     closePreloader() {
       this.isWebsiteLoaded = true;
+    },
+    closeMenu() {
+      if (this.isMenuOpen) {
+        this.isMenuOpen = false;
+      }
     },
   },
 };

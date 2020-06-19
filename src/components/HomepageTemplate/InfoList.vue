@@ -3,7 +3,7 @@
     ul
       li(v-for="item in list" :key="item.title")
         span.title {{ item.title }}
-        span.value {{ item.value }}
+        span.value {{ $_handleI18n(item, page, 'value') }}
 </template>
 <script>
 export default {
@@ -12,6 +12,7 @@ export default {
       type: Array,
       default: () => [],
     },
+    page: String,
   },
 };
 </script>

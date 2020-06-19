@@ -18,7 +18,7 @@
 
                 div.post-info
                   div.blog-item-title-group
-                    h4.blog-item-title {{ item.title }}
+                    h4.blog-item-title {{ $_handleI18n(item, page, 'title') }}
                     a(:href="item.repoUrl" v-if="item.repoUrl")
                       font-awesome-icon(:icon="['fab', 'github']")
                   div.blog-tags
@@ -36,6 +36,7 @@
 export default {
   data() {
     return {
+      page: 'portfolio',
       demoSource: null,
       scrollTop: 0,
       screenWidth: 0,
@@ -66,6 +67,7 @@ export default {
   mounted() {
     window.addEventListener('resize', this.getScreenSize);
     this.$refs.portfolio.addEventListener('scroll', this.getPosition);
+    this.screenWidth = window.innerWidth;
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.getScreenSize);
@@ -116,7 +118,7 @@ export default {
       border: 1px solid #fff;
       color: #fff;
       background-color: transparent;
-      padding: 8px 10px;
+      padding: 4px 10px;
       font-size: 13px;
       z-index: 2;
       &:hover {

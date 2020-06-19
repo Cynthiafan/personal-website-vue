@@ -13,27 +13,34 @@ div
       div.fun-fact.gray-default
         div.icon
           font-awesome-icon(:icon="['fas', 'volleyball-ball']")
-        h4 Volleyball
+        h4 {{ $t(`${page}.volleyball`) }}
         span.fun-fact-block-value
-        span.fun-fact-block-text Used to be a player in colleage department, and a reporter of self-media.
+        span.fun-fact-block-text {{ $t(`${page}.volleyballDescription`) }}
 
     div.col-xs-12.col-lg-4.col-md-6
       div.fun-fact.gray-default
         div.icon
           font-awesome-icon(:icon="['fas', 'puzzle-piece']")
-        h4 Jigsaw Puzzle
+        h4 {{ $t(`${page}.jigsawPuzzle`) }}
         span.fun-fact-block-value
-        span.fun-fact-block-text Enjoy collecting and playing challenging jigsaw puzzles.
+        span.fun-fact-block-text {{ $t(`${page}.jigsawPuzzleDescription`) }}
 
     div.col-xs-12.col-lg-4.col-md-6
       div.fun-fact.gray-default
         div.icon
           font-awesome-icon(:icon="['fas', 'film']")
-        h4 Movie Appreciation
+        h4 {{ $t(`${page}.movieAppreciation`) }}
         span.fun-fact-block-value 
-        span.fun-fact-block-text Obsessed with metaphor and symbols of movies which can make me taste the movie over again and again.
+        span.fun-fact-block-text {{ $t(`${page}.movieAppreciationDescription`) }}
 
 </template>
+<script>
+export default {
+  props: {
+    page: String,
+  },
+};
+</script>
 <style lang="scss" scoped>
 .fun-fact {
   position: relative;

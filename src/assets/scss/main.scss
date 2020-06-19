@@ -2,9 +2,6 @@
 @import './variables/colors.scss';
 @import './variables/z-index.scss';
 
-// Components
-@import './components/buttons.scss';
-
 @import './common';
 @import './animate';
 @import './font';
@@ -72,6 +69,11 @@ a {
 
 p {
   margin-bottom: 10px;
+}
+
+button {
+  outline: none !important;
+  color: $color-btn-text;
 }
 
 .animated {

@@ -13,11 +13,11 @@
             div.img
               img(src="../../assets/images/main_photo.jpg" alt="name")
             div.text
-              p {{ testimonial.content }}
+              p {{ $_handleI18n(testimonial, page, 'content') }}
 
             div.author-info
               h4.author {{ testimonial.author }}
-              h5.company {{ testimonial.company }}
+              h5.company {{ $_handleI18n(testimonial, page, 'company') }}
               div.icon
                 font-awesome-icon(:icon="['fas', 'quote-right']")
 </template>
@@ -28,6 +28,7 @@ export default {
       type: Array,
       default: () => [],
     },
+    page: String,
   },
 };
 </script>

@@ -9,23 +9,23 @@
       //-- Personal Information] --
       div.row
         div.col-xs-12.col-sm-7
-          p I’m a creative and enthusiastic front-end developer with 2+ years of experience building and maintaining responsive websites/applications. I have strong experience with aesthetics and interaction, as well as commitment to the best experience for all users. Diverse professional education experiences have enabled me to understand a variety of user viewpoints.
+          p {{ $t(`${page}.intro`) }}
 
         div.col-xs-12.col-sm-5
-          InfoList(:list="$store.state.information")
+          InfoList(:list="$store.state.information" :page="page")
         
       div.white-space-50
       //--------------------------
 
 
       //------- [Services] -------
-      Service
+      Service(:page="page")
       div.white-space-30
       //--------------------------
 
 
       //----- [Testimonials] -----
-      Testimonial(:list="$store.state.testimonials")
+      Testimonial(:list="$store.state.testimonials" :page="page")
       div.white-space-50
       //--------------------------
 
@@ -41,7 +41,7 @@
 
 
       //------ [Fun Facts] -------
-      FunFact
+      FunFact(:page="page")
       //--------------------------
 
     </div>
@@ -59,6 +59,11 @@ export default {
     Testimonial,
     Service,
     FunFact,
+  },
+  data() {
+    return {
+      page: 'about',
+    };
   },
 };
 </script>

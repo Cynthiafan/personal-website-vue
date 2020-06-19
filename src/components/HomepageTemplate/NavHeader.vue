@@ -6,7 +6,7 @@
         img(src="@/assets/images/main_photo.jpg" alt="Alex Smith")
       div.header-titles
         h2 Cynthia Fan
-        h4 Frontend Developer
+        h4 {{ $t(`${page}.frontendDeveloper`) }}
 
     //- Right side nav
     ul.main-menu
@@ -15,11 +15,15 @@
           :to="block.path" 
           :class="{ active: block.path === currentPath }")
           span.menu-icon.lnr(:class="block.icon")
-          span.link-text {{ block.text }}
-      li.toggle-language
-        span.text 中
-        div
-        span.text EN
+          span.link-text {{ $_handleI18n(block, page, 'text') }}
+      li.language
+        div.divide
+        div.nav-item(@click="toggleLanguage")
+          font-awesome-icon(:icon="['fas', 'globe']")
+          div.text-group
+            span.text(:class="{ active: locale === 'zh' }") 中
+            span  |  
+            span.text(:class="{ active: locale === 'en' }") EN
 
     div.social-links
       ul
@@ -28,14 +32,21 @@
             font-awesome-icon(:icon="link.icon")
 
     div.header-buttons
-      a.btn.btn-primary(download="Frontend_Cynthia" href="/resume/en_202005.pdf") Download CV
+      a.download-btn(download="Frontend_Cynthia" :href="`/resume/${locale}_202005.pdf`") {{ $t(`${page}.downloadCV`) }}
 
     div.copyrights {{ currentYear }} All rights reserved.
     
 
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex';
+
 export default {
+  data() {
+    return {
+      page: 'menu',
+    };
+  },
   props: {
     isMenuOpen: {
       type: Boolean,
@@ -43,6 +54,7 @@ export default {
     },
   },
   computed: {
+    ...mapGetters(['locale']),
     currentPath() {
       return this.$route.path;
     },
@@ -50,9 +62,21 @@ export default {
       return new Date().getFullYear();
     },
   },
+  methods: {
+    ...mapActions(['switchLocale']),
+    toggleLanguage() {
+      const locale = this.locale === 'zh' ? 'en' : 'zh';
+
+      this.switchLocale(locale);
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
+* {
+  user-select: none;
+}
+
 .header {
   display: inline-block;
   float: left;
@@ -134,6 +158,25 @@ export default {
       transition: all 0.3s ease-in-out;
       z-index: 0;
       box-shadow: 0px 10px 10px -8px rgba(0, 0, 0, 0.22);
+    }
+  }
+}
+.language {
+  font-size: 14px;
+  padding: 0 15px;
+  margin-top: 10px;
+  cursor: pointer;
+  .divide {
+    border-top: 1px dashed #b5b6b7;
+    margin-bottom: 10px;
+  }
+  svg {
+    font-size: 25px;
+  }
+  .text-group {
+    font-size: 12px;
+    .active {
+      color: $color-greenMunsell;
     }
   }
 }
@@ -224,11 +267,14 @@ export default {
 /* --- End Social Links --- */
 
 .header-buttons {
-  margin-top: 15px;
-  .btn-primary {
+  margin: 35px 0 20px;
+  .download-btn {
     background-color: transparent;
     color: #f5f5f5;
-    border-color: #f5f5f5;
+    border: 2px solid #f5f5f5;
+    padding: 0.6em 2.1em;
+    outline: 0;
+    border-radius: 30px;
     &:hover {
       background-color: #fff;
       color: #0ba376;

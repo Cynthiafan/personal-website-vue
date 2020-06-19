@@ -4,11 +4,12 @@
     div.timeline-item.clearfix(v-for="item in list" :key="item.company")
       div.left-part
         h5.item-period {{ item.period.start }} - {{ item.period.end }}
-        span.item-company {{ item.company }}
+        span.item-company {{ $_handleI18n(item, page, 'company') }}
       div.divider
       div.right-part
-        h4.item-title {{ item.title }}
-        p {{ item.description }}
+        h4.item-title {{ $_handleI18n(item, page, 'title') }}
+        ul.item-description
+          li(v-for="sentence in $_handleI18n(item, page, 'description')" :key="sentence") {{ sentence }}
 </template>
 <script>
 export default {
@@ -17,6 +18,7 @@ export default {
       type: Array,
       default: () => [],
     },
+    page: String,
   },
 };
 </script>
@@ -87,9 +89,31 @@ export default {
       z-index: 1;
     }
   }
+  @include respond-to(ss) {
+    .left-part {
+      width: 26%;
+      padding-left: 0;
+      .item-company {
+        word-break: break-all;
+      }
+    }
+    .divider {
+      left: 26%;
+    }
+    .right-part {
+      width: 71%;
+      padding-left: 15px;
+    }
+  }
   .item-title {
     font-size: 16px;
     margin-bottom: 3px;
+    margin-top: 3px;
+  }
+  .item-description {
+    list-style: disc;
+    padding-left: 22px;
+    padding-bottom: 10px;
   }
   .item-period {
     color: #aaa;

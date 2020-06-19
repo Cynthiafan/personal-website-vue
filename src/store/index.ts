@@ -1,15 +1,16 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import { setI18nLocale } from '@/plugins/i18n';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     blocks: [
-      { path: '/', text: 'Home', icon: 'lnr-home', componentName: 'Landing' },
-      { path: '/about', text: 'About', icon: 'lnr-user', componentName: 'About' },
-      { path: '/resume', text: 'Resume', icon: 'lnr-briefcase', componentName: 'Resume' },
-      { path: '/portfolio', text: 'Portfolio', icon: 'lnr-book', componentName: 'Portfolio' },
+      { path: '/', text: 'home', icon: 'lnr-home', componentName: 'Landing', i18n: true },
+      { path: '/about', text: 'about', icon: 'lnr-user', componentName: 'About', i18n: true },
+      { path: '/resume', text: 'resume', icon: 'lnr-briefcase', componentName: 'Resume', i18n: true },
+      { path: '/portfolio', text: 'portfolio', icon: 'lnr-book', componentName: 'Portfolio', i18n: true },
       // { path: '/contact', text: 'Contact', icon: 'lnr-envelope', componentName: 'Contact' },
     ],
     links: [
@@ -18,17 +19,16 @@ export default new Vuex.Store({
       { key: 'email', url: 'mailto:cynthiafan1230@gmail.com', icon: ['far', 'envelope'] },
     ],
     information: [
-      { title: 'Location', value: 'Taipei, Taiwan' },
+      { title: 'Location', value: 'location', i18n: true },
       { title: 'e-mail', value: 'cynthiafan1230@gmail.com' },
       { title: 'Status', value: 'HIRABLE' },
     ],
     testimonials: [
       {
         author: 'Kent Jian',
-        company: 'CTO of RE Co., Ltd.',
-        content: `Cynthia 在個人特質方面，文靜但不怯場，各種需表達的場合皆具有良好的表達與敘事能力，與同事合作共事氣氛十分融洽。
-        在工作表現方面，思緒周延且具宏觀視野，做事細心有條理，是能分擔上司工作又能讓上司放心交辦重要任務的好夥伴。
-        在專業技能方面，擁有扎實的 JavaScript 開發技能，具備有前端工程師應有的知識與技能，更難能可貴的是積極的充實自我，是個有實力又潛力無限的優秀工程師！`,
+        company: 'kentTitle',
+        content: 'kentTestimonial',
+        i18n: true,
       },
     ],
     skills: [
@@ -42,107 +42,147 @@ export default new Vuex.Store({
     ],
     preloaderMs: 3000,
     knowledgeTags: ['Git/Git flow', 'storybook', 'vuepress', 'fp', 'Heroku', 'Netlify', 'AWS EC2', 'Google Apps Script', 'Adobe XD', 'Sketch', 'MacOs', 'Social Marketing', 'Google analytics', 'Sense of UI/UX'],
+    education: [
+      {
+        company: 'colleage',
+        title: 'department',
+        period: {
+          start: '2010',
+          end: '2014',
+        },
+        description: 'colleageDescription',
+        i18n: true,
+      },
+      {
+        company: 'koreaUniversity',
+        title: 'koreanLanguageCenter',
+        period: {
+          start: '2014',
+          end: '2015',
+        },
+        description: 'languageCenterDescription',
+        i18n: true,
+      },
+    ],
     experience: [
       {
-        company: 'RE',
+        company: 're',
         url: '',
-        title: 'Front-end Engineer',
+        title: 'frontendEngineer',
         period: {
           start: '2018',
           end: '2019',
         },
-        description: 'Participated in brainstorming of products, discussed UI/UX design with other front-end developers and visual designers, worked to achieve improved user experiences and program structure.',
+        description: 'reJD',
+        i18n: true,
       },
       {
-        company: 'CrowdInsight',
+        company: 'crowdinsight',
         url: '',
-        title: 'Front-end Engineer',
+        title: 'frontendEngineer',
         period: {
           start: '2017',
           end: '2018',
         },
-        description: 'Built websites and initiated coding style guide with other front-end developers.',
+        description: 'ciJD',
+        i18n: true,
       },
       {
-        company: 'Lovemove',
+        company: 'lovemove',
         url: '',
-        title: 'Marketing Management',
+        title: 'marketingManagement',
         period: {
           start: '2016',
           end: '2017',
         },
-        description: 'Formulated the marketing plan of social media pages and implemented them with colleagues.',
+        description: 'lmJD',
+        i18n: true,
       },
     ],
     certificates: [
-      { title: 'Test of Proficiency in Korean', logo: '', logoAlt: 'TOPIK', id: 'Level 3', year: '2015' },
+      { title: 'topik', logo: '', logoAlt: 'TOPIK', id: 'Level 3', year: '2015', i18n: true },
     ],
     languages: [
-      { label: 'Mandarin', text: 'Native', value: '100%' },
-      { label: 'English', text: 'Intermediate', value: '70%' },
-      { label: 'Korean', text: 'Conversational', value: '40%' },
+      { label: 'mandarin', text: 'native', value: '100%', i18n: true },
+      { label: 'english', text: 'intermediate', value: '70%', i18n: true },
+      { label: 'korean', text: 'conversational', value: '40%', i18n: true },
     ],
     portfolio: [
       {
-        title: 'Tech Blog',
+        title: 'techBlog',
         img: 'blog.png',
         tags: ['vuepress', 'netlify'],
         repoUrl: 'https://github.com/Cynthiafan/tech-blog',
         action: {
           text: 'Visit', type: 'url', url: 'https://blog.cynthiafan.com',
         },
+        i18n: true,
       },
       {
-        title: 'Components',
+        title: 'components',
         img: 'component.png',
         tags: ['storybook', 'd3.js'],
         repoUrl: 'https://github.com/Cynthiafan/personal-website-vue',
         action: {
           text: 'Visit', type: 'url', url: 'https://cynthiafan.com/storybook',
         },
+        i18n: true,
       },
       {
-        title: 'Seoul Travel',
+        title: 'seoulTravel',
         img: 'line-notify.jpg',
         tags: ['line bot', 'express', 'mLab', 'heroku'],
         repoUrl: 'https://github.com/Cynthiafan/line-bot-api',
         action: {
           text: 'View Demo', type: 'video', video: 'line-bot.gif',
         },
+        i18n: true,
       },
       {
-        title: 'Mr.Stock',
+        title: 'mrStock',
         img: 'line-notify.jpg',
         tags: ['line notify', 'Google Apps Script'],
         repoUrl: '',
         action: {
           text: 'View Note', type: 'url', url: 'https://blog.cynthiafan.com/posts/lets-do-it/line-notify-gas.html',
         },
+        i18n: true,
       },
       {
-        title: 'Freecell',
+        title: 'freecell',
         img: 'freecell.png',
         tags: ['vue'],
         repoUrl: 'https://github.com/Cynthiafan/personal-website-vue/tree/master/src/views/FreeCell',
         action: {
           text: 'Visit', type: 'url', url: 'https://cynthiafan.com/f2e-challenge/free-cell',
         },
+        i18n: true,
       },
       {
-        title: 'Personal Website -- HERE',
+        title: 'personalWeb',
         img: 'blog.png',
-        tags: ['vue', 'netlify'],
+        tags: ['vue', 'netlify', 'i18n'],
         url: '',
         repoUrl: 'https://github.com/Cynthiafan/personal-website-vue',
+        i18n: true,
       },
     ],
+    locale: 'zh',
   },
   getters: {
     blocks: (state) => state.blocks,
+    locale: (state) => state.locale,
   },
   mutations: {
+    SWITCH_LOCALE(state, lang) {
+      state.locale = lang;
+    },
   },
   actions: {
+    switchLocale({ commit }, lang) {
+      commit('SWITCH_LOCALE', lang);
+      setI18nLocale(lang);
+    },
   },
   modules: {
   },

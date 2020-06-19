@@ -7,7 +7,7 @@
       
       div.certi-content
         div.certi-title
-          h4 {{ item.title }}
+          h4 {{ $_handleI18n(item, page, 'title') }}
         div.certi-id
           span {{ item.id }}
         div.certi-date
@@ -22,6 +22,7 @@ export default {
       type: Array,
       default: () => [],
     },
+    page: String,
   },
 };
 </script>

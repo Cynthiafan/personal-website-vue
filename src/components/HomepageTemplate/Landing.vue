@@ -7,7 +7,7 @@
             h2 Cynthia Fan
             div.owl-carousel.text-rotation
               div.item
-                div.sp-subtitle Frontend-developer
+                div.sp-subtitle Front-end Developer
 </template>
 <style lang="scss" scoped>
 .vcentered {

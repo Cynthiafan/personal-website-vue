@@ -1,0 +1,70 @@
+{
+  "menu": {
+    "home": "Home",
+    "about": "About",
+    "resume": "Resume",
+    "portfolio": "Portfolio",
+    "downloadCV": "Download CV",
+    "frontendDeveloper": "Front-end Developer"
+  },
+  "about": {
+    "intro": "I’m a creative and enthusiastic front-end developer with 2+ years of experience building and maintaining responsive websites/applications. I have strong experience with aesthetics and interaction, as well as commitment to the best experience for all users. Diverse professional education experiences have enabled me to understand a variety of user viewpoints.",
+    "location": "Taipei, Taiwan",
+    "webDev": "Mainly focus on front-end development. Having a sensitivity to UI/UX, and strive to develop websites that both fashionable and well-performance. ",
+    "copywriting": "High sensitivity to words, and good in writing copy and proofreading. Besides, capable to determine the style of writing according to the target audience, to ensure the style consistency and professionalism.",
+    "kentTestimonial": "Cynthia 在個人特質方面，文靜但不怯場，各種需表達的場合皆具有良好的表達與敘事能力，與同事合作共事氣氛十分融洽。在工作表現方面，思緒周延且具宏觀視野，做事細心有條理，是能分擔上司工作又能讓上司放心交辦重要任務的好夥伴。在專業技能方面，擁有扎實的 JavaScript 開發技能，具備有前端工程師應有的知識與技能，更難能可貴的是積極的充實自我，是個有實力又潛力無限的優秀工程師！",
+    "kentTitle": "CTO of RE CO., Ltd.",
+    "volleyball": "Volleyball",
+    "volleyballDescription": "Used to be a setter in the department team. Even though not playing volleyball now, still love volleyball in other ways",
+    "jigsawPuzzle": "Jigsaw Puzzle",
+    "jigsawPuzzleDescription": "Enjoy collecting and playing challenging jigsaw puzzles. Hope to build a room decorated by those jigsaw puzzles someday.",
+    "movieAppreciation": "Movie Appreciation",
+    "movieAppreciationDescription": "Obsessed with metaphor and symbols of movies which can make me taste the movie over again and again."
+  },
+  "resume": {
+    "re": "RE",
+    "frontendEngineer": "Front-end Engineer",
+    "marketingManagement": "Marketing Management",
+    "reJD": [
+      "Participated in brainstorming of products, discussed UI/UX design with other front-end developers and visual designers, worked to achieve improved user experiences and program structure",
+      "Developed and maintained several common-use components such as number keyboards and date range selectors"
+    ],
+    "crowdinsight": "CrowdInsight",
+    "ciJD": [
+      "Developed frontend websites and finished other tasks from PM",
+      "Initiated and established coding style guide with other front-end developers"
+    ],
+    "lovemove": "Lovemove",
+    "lmJD": [
+      "Co-founder of VolleyCube (self-media) ",
+      "Formulated the marketing plan of social media pages and implemented them with colleagues",
+      "Managed and trained 10 interns to analyze social media page data"
+    ],
+    "mandarin": "Mandarin",
+    "native": "Native",
+    "english": "English",
+    "intermediate": "Intermediate",
+    "korean": "Korean",
+    "conversational": "Conversational",
+    "topik": "Test of Proficiency in Korean",
+    "colleage": "Fu Jen University",
+    "department": "Chinese Literature",
+    "colleageDescription": [
+      "Minored in Restaurant, Hotel and Institutional Management",
+      "President of student association"
+    ],
+    "koreaUniversity": "Korea University",
+    "koreanLanguageCenter": "Korean Language Center",
+    "languageCenterDescription": [
+      "Passed Test of Proficiency in Korean level 3"
+    ]
+  },
+  "portfolio": {
+    "techBlog": "Tech Blog",
+    "components": "Components",
+    "seoulTravel": "Seoul Travel",
+    "mrStock": "Mr.Stock",
+    "freecell": "Freecell",
+    "personalWeb": "Personal Web (HERE!)"
+  }
+}
