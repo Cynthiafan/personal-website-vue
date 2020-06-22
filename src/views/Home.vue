@@ -23,7 +23,8 @@
 
         div.content-area
           div.animated-sections
-            router-view
+            keep-alive
+              router-view
 </template>
 <script>
 import Preloader from '@/components/HomepageTemplate/Preloader';
