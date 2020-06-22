@@ -8,7 +8,7 @@
     div.lm-animated-bg 
 
     div.page
-      div.page-content
+      div.page-content(:class="{ mobile: isMobile }")
         
         NavHeader(:isMenuOpen="isMenuOpen")
 
@@ -30,6 +30,7 @@ import Preloader from '@/components/HomepageTemplate/Preloader';
 import NavHeader from '@/components/HomepageTemplate/NavHeader';
 import ArrowsNav from '@/components/HomepageTemplate/ArrowsNav';
 import { mapGetters } from 'vuex';
+import device from 'current-device';
 
 export default {
   components: {
@@ -45,6 +46,9 @@ export default {
   },
   computed: {
     ...mapGetters(['locale']),
+    isMobile() {
+      return device.mobile();
+    },
   },
   watch: {
     locale() {
@@ -136,7 +140,10 @@ export default {
       padding: 0;
       margin: 0;
       border-radius: 0;
-      min-height: 100vh;
+      height: 100vh;
+      &.mobile {
+        max-height: stretch;
+      }
     }
     .content-area {
       max-width: 100%;

@@ -4835,6 +4835,11 @@ csstype@^2.2.0, csstype@^2.5.7, csstype@^2.6.7:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.10.tgz#e63af50e66d7c266edb6b32909cfd0aabe03928b"
   integrity sha512-D34BqZU4cIlMCY93rZHbrq9pjTAQJ3U8S8rfBqjwHxkGPThWFjzZDQpgMJY0QViLxth6ZKYiwFBo14RdN44U/w==
 
+current-device@^0.10.1:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/current-device/-/current-device-0.10.1.tgz#aa6bf844eb4c505fe4b734b7cd1d01d074f161e1"
+  integrity sha512-bjH+Ge4aISRjZnuh9VWeGJuB0v2YMknfk+5XWIcRe9wHYaQDTSchUbccTFMJrN37xr3AOaV37sllVdPhdqJcXA==
+
 current-script-polyfill@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/current-script-polyfill/-/current-script-polyfill-1.0.0.tgz#f31cf7e4f3e218b0726e738ca92a02d3488ef615"

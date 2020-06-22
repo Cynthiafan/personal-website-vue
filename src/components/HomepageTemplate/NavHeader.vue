@@ -88,6 +88,9 @@ export default {
   text-align: center;
   padding: 56px 30px 45px;
   overflow: auto;
+  @include respond-to(sm) {
+    max-height: none;
+  }
 }
 
 .header-titles {
