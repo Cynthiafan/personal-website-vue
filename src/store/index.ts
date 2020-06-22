@@ -110,7 +110,7 @@ export default new Vuex.Store({
     portfolio: [
       {
         title: 'techBlog',
-        img: 'blog.png',
+        img: 'portfolio-blog.png',
         tags: ['vuepress', 'netlify'],
         repoUrl: 'https://github.com/Cynthiafan/tech-blog',
         action: {
@@ -120,7 +120,7 @@ export default new Vuex.Store({
       },
       {
         title: 'components',
-        img: 'component.png',
+        img: 'portfolio-component.png',
         tags: ['storybook', 'd3.js'],
         repoUrl: 'https://github.com/Cynthiafan/personal-website-vue',
         action: {
@@ -130,17 +130,17 @@ export default new Vuex.Store({
       },
       {
         title: 'seoulTravel',
-        img: 'line-notify.jpg',
+        img: 'portfolio-line-bot.jpg',
         tags: ['line bot', 'express', 'mLab', 'heroku'],
         repoUrl: 'https://github.com/Cynthiafan/line-bot-api',
         action: {
-          text: 'View Demo', type: 'video', video: 'line-bot.gif',
+          text: 'View Demo', type: 'video', video: 'portfolio-line-bot.gif',
         },
         i18n: true,
       },
       {
         title: 'mrStock',
-        img: 'line-notify.jpg',
+        img: 'portfolio-line-notify.jpg',
         tags: ['line notify', 'Google Apps Script'],
         repoUrl: '',
         action: {
@@ -150,7 +150,7 @@ export default new Vuex.Store({
       },
       {
         title: 'freecell',
-        img: 'freecell.png',
+        img: 'portfolio-freecell.png',
         tags: ['vue'],
         repoUrl: 'https://github.com/Cynthiafan/personal-website-vue/tree/master/src/views/FreeCell',
         action: {
@@ -160,7 +160,7 @@ export default new Vuex.Store({
       },
       {
         title: 'personalWeb',
-        img: 'blog.png',
+        img: 'portfolio-personal-web.png',
         tags: ['vue', 'netlify', 'i18n'],
         url: '',
         repoUrl: 'https://github.com/Cynthiafan/personal-website-vue',

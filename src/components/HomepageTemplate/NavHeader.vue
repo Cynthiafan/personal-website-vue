@@ -3,7 +3,7 @@
 
     div.header-content
       div.header-photo
-        img(src="@/assets/images/main_photo.jpg" alt="Alex Smith")
+        img(src="@/assets/images/photo.jpg" alt="Cynthia Fan")
       div.header-titles
         h2 Cynthia Fan
         h4 {{ $t(`${page}.frontendDeveloper`) }}

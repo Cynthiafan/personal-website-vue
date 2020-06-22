@@ -11,7 +11,7 @@
 
           div.testimonial(v-for="testimonial in list" :key="testimonial.author")
             div.img
-              img(src="../../assets/images/main_photo.jpg" alt="name")
+              img(src="../../assets/images/icon-man.png" :alt="testimonial.author")
             div.text
               p {{ $_handleI18n(testimonial, page, 'content') }}
 

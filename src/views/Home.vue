@@ -76,7 +76,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .lm-animated-bg {
-  background-image: url('~@/assets/images/main_bg.png');
+  background-image: url('~@/assets/images/bg-main.png');
   position: absolute;
   width: auto;
   height: auto;
