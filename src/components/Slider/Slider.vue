@@ -1,7 +1,7 @@
 <template lang="pug">
   div.slider
     input.slider-bar(type="range" min="0" :max="maxValue" v-model.number="tempNum")
-    i.slider-icon.icon-menu(:style="{ left: `${iconPositionLeft}px` }")
+    i.slider-icon.lnr.lnr-menu(:style="{ left: `${iconPositionLeft}px` }")
 </template>
 
 <script>

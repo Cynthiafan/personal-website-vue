@@ -398,6 +398,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .barChart {
+  background: #fff;
   &__chart {
     width: 100%;
     position: relative;
