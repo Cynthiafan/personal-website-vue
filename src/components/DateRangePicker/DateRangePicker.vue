@@ -421,11 +421,12 @@ export default {
       justify-content: center;
       height: 15%;
       button {
-        width: 50%;
+        width: 45%;
         border-radius: 5px;
-        padding: 8px 10px;
+        padding: 5px 10px;
+        font-size: 12px;
         &:first-child {
-          margin-right: 5px;
+          margin-right: 10px;
         }
       }
       &__cancel {

@@ -1,0 +1,70 @@
+{
+  "menu": {
+    "home": "首頁",
+    "about": "關於我",
+    "resume": "經歷",
+    "portfolio": "作品集",
+    "downloadCV": "下載履歷",
+    "frontendDeveloper": "前端工程師"
+  },
+  "about": {
+    "intro": "擁有 2 年以上的程式開發經驗，對寫程式有著莫大的熱情。具備獨立開發、解決問題的能力，也能與團隊合作、溝通無礙。持續關注各領域的發展，並且適時運用於工作上。時常精進自己的知識與能力，不排斥新的事物。\n有著多樣的經歷讓我能以不同的角度解讀事物，並且能條理分明地表達看法、良好地與他人溝通。",
+    "location": "台灣台北",
+    "webDev": "主要專注於前端相關開發，對 UI/UX 有一定的敏銳度，致力開發出兼顧美感與效能的網頁。此外，喜歡打造小工具來增加生活的便利性，尤其常使用 Line 的開發者工具。",
+    "copywriting": "對文字的敏感度高，擁有文案撰寫、校對能力，能根據產品的觸及族群決定文風，以確保產品的風格一致性及其專業度。",
+    "kentTestimonial": "Cynthia 在個人特質方面，文靜但不怯場，各種需表達的場合皆具有良好的表達與敘事能力，與同事合作共事氣氛十分融洽。在工作表現方面，思緒周延且具宏觀視野，做事細心有條理，是能分擔上司工作又能讓上司放心交辦重要任務的好夥伴。在專業技能方面，擁有扎實的 JavaScript 開發技能，具備有前端工程師應有的知識與技能，更難能可貴的是積極的充實自我，是個有實力又潛力無限的優秀工程師！",
+    "kentTitle": "阿爾伊技術長",
+    "volleyball": "排球",
+    "volleyballDescription": "在系排球隊擔任舉球員，也曾在國際賽事以自媒體記者身份撰寫報導，用各種方式愛著排球。",
+    "jigsawPuzzle": "拼圖",
+    "jigsawPuzzleDescription": "喜歡收集並且完成具有挑戰性的拼圖，希望有朝一日能用裱框好的拼圖將房子裝飾滿滿的。",
+    "movieAppreciation": "電影鑑賞",
+    "movieAppreciationDescription": "對電影中的暗示或象徵感到著迷，也是因為有這些元素才能一再細細品嘗回味。"
+  },
+  "resume": {
+    "re": "阿爾伊",
+    "frontendEngineer": "前端工程師",
+    "marketingManagement": "行銷管理",
+    "reJD": [
+      "參與產品的功能發想與規劃，並與其他前端及視覺設計討論 UI/UX 設計，以同時達到更好的使用者體驗及程式架構",
+      "開發並維護常用組件，如數字鍵盤、日期範圍選擇器等"
+    ],
+    "crowdinsight": "治略資訊",
+    "ciJD": [
+      "負責切版、串接後端 API 及其他 PM 交辦事項",
+      "發起並與其他前端共同制定程式編寫風格指南"
+    ],
+    "lovemove": "愛動行銷",
+    "lmJD": [
+      "自媒體翻轉排球共同創辦人",
+      "製作社群行銷企劃並執行",
+      "管理 10 名實習生，訓練如何分析行銷成效"
+    ],
+    "mandarin": "中文",
+    "native": "母語",
+    "english": "英文",
+    "intermediate": "中等",
+    "korean": "韓文",
+    "conversational": "生活會話",
+    "topik": "韓語檢定",
+    "colleage": "輔仁大學",
+    "department": "中國文學系",
+    "colleageDescription": [
+      "輔系餐旅管理學系",
+      "曾任系學會會長"
+    ],
+    "koreaUniversity": "韓國高麗大學",
+    "koreanLanguageCenter": "韓文語學堂",
+    "languageCenterDescription": [
+      "通過韓語檢定 3 級"
+    ]
+  },
+  "portfolio": {
+    "techBlog": "技術筆記",
+    "components": "組件集",
+    "seoulTravel": "首爾旅遊",
+    "mrStock": "股票懶人斯塔克",
+    "freecell": "新接龍",
+    "personalWeb": "個人網站 (HERE!)"
+  }
+}

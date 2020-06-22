@@ -2,7 +2,7 @@
   div#parabola
     img.ball(src="../../assets/images/basketball.svg")
     img.hole(src="../../assets/images/hole.svg")
-    button(@click="throwBall" :disabled="!isBtnClickable") Throw ball
+    button.btn-throw(@click="throwBall" :disabled="!isBtnClickable") Throw ball
 </template>
 <script>
 import { createParabola } from '@/utils/parabola.utils';
@@ -44,6 +44,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+#parabola {
+  padding: 10px;
+}
 .ball {
   position: absolute;
   left: 100px;
@@ -55,5 +58,13 @@ export default {
   position: absolute;
   right: 60px;
   bottom: 60px;
+}
+.btn-throw {
+  color: #fff;
+  background-color: $color-classicBlue;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 14px;
 }
 </style>
