@@ -9,6 +9,7 @@ module.exports = {
       },
     }
   },
+
   chainWebpack: config => {
     config.module
       .rule('md')
@@ -16,5 +17,14 @@ module.exports = {
       .use('raw-loader')
       .loader('raw-loader')
       .end();
+  },
+
+  pluginOptions: {
+    i18n: {
+      locale: 'zh',
+      fallbackLocale: 'zh',
+      localeDir: 'locales',
+      enableInSFC: false
+    }
   }
 };
