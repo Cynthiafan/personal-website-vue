@@ -10,11 +10,11 @@ $mdw: 1025px;
 $mdw2: 1024px;
 $sdw: 768px;
 $ssw: 480px;
-$breakpoints: ( 'md': 'only screen and (max-width: #{$lgw})',
+$breakpoints: ( 'md': 'screen and (max-width: #{$lgw})', // < $lgw
   'mmd': 'only screen and (min-width: #{$mdw})',
   'sm': 'only screen and (max-width: #{$mdw2})',
-  'ssm': 'only screen and (max-width: #{$sdw})',
-  'ss': 'only screen and (max-width: #{$ssw})');
+  'ssm': 'screen and (max-width: #{$sdw})', // < $sdw
+  'ss': 'screen and (max-width: #{$ssw})'); // < $ssw
 
 @mixin respond-to($name) {
     @media #{map-get($breakpoints, $name)} {

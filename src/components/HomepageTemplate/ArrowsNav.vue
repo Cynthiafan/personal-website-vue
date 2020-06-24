@@ -1,8 +1,8 @@
 <template lang="pug">
-div.lmpixels-arrows-nav
-  div.lmpixels-arrow-right(@click="setBlockIdx(1)")
+div.arrows-nav
+  div.arrow-right(@click="setBlockIdx(1)")
     i.lnr.lnr-chevron-right
-  div.lmpixels-arrow-left(@click="setBlockIdx(-1)")
+  div.arrow-left(@click="setBlockIdx(-1)")
     i.lnr.lnr-chevron-left
 </template>
 <script>
@@ -32,29 +32,30 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.lmpixels-arrows-nav {
+.arrows-nav {
   position: absolute;
   padding: 10px 0;
   width: 60px;
   right: -80px;
-  background-color: #444;
+  background-color: $color-onyx;
   border-radius: 35px;
   z-index: 98;
   list-style: none;
   bottom: 0;
   box-shadow: 0 0 30px -5px rgba(0, 0, 0, 0.15);
-  div {
+  .arrow-left,
+  .arrow-right {
     display: block;
     position: relative;
     text-align: center;
-    color: #b5b6b7;
+    color: $color-grayX11-200;
     padding: 10px;
     font-size: 24px;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
 
     &:hover {
-      color: #0ba376;
+      color: $color-greenMunsell;
     }
   }
   @include respond-to(sm) {
@@ -63,8 +64,9 @@ export default {
     right: 10px;
     bottom: 10px;
     padding: 5px 0;
-    border: 2px solid #0ba376;
-    div {
+    border: 2px solid $color-greenMunsell;
+    .arrow-left,
+    .arrow-right {
       font-size: 24px;
     }
   }

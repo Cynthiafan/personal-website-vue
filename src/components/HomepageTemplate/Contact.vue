@@ -1,5 +1,5 @@
 <template>
-  <section data-id="contact" class="animated-section">
+  <section>
     <div class="page-title">
       <h2>Contact</h2>
     </div>
@@ -99,7 +99,6 @@
   </section>
 </template>
 <style lang="scss" scoped>
-/* --- Contact Form --- */
 .controls.two-columns .left-column {
   width: 47%;
   float: left;
@@ -114,5 +113,60 @@
 .g-recaptcha {
   margin-bottom: 20px;
 }
-/* --- End of Contact Form --- */
+
+/* --- Info Block with Borders --- */
+.lm-info-block {
+  position: relative;
+  text-align: center;
+  width: 100%;
+  display: block;
+  margin: 0 0 15px 0;
+  background-color: #333;
+  padding: 20px 10px;
+  border: 1px solid #444;
+  box-shadow: none;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+}
+
+.lm-info-block i {
+  position: relative;
+  font-size: 33px;
+  color: $color-greenMunsell;
+  z-index: 1;
+}
+
+.lm-info-block h4 {
+  font-size: 15px;
+  margin-top: 8px;
+}
+
+.lm-info-block .lm-info-block-value {
+  font-size: 30px;
+  line-height: 30px;
+  font-weight: 400;
+  display: block;
+  margin: 10px 0;
+  color: $color-greenMunsell;
+}
+
+.lm-info-block .lm-info-block-value:empty {
+  margin: 0;
+}
+/* --- End of Info Block with Borders --- */
+
+.map {
+  width: 100%;
+  height: 140px;
+  margin: 0 0 35px;
+}
+
+@media only screen and (max-width: 480px) {
+  .controls.two-columns .right-column,
+  .controls.two-columns .left-column {
+    float: none;
+    margin: 0;
+    width: 100%;
+  }
+}
 </style>

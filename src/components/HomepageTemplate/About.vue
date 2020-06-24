@@ -1,5 +1,5 @@
 <template lang="pug">
-  section.animated-section(data-id="about-me")
+  section
     div.page-title
       h2 About 
         span Me

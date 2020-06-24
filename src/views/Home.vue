@@ -1,5 +1,6 @@
 <template lang="pug">
-  div.homepage
+  div
+
     //- Loading animation 
     transition(name="fade" mode="out-in")
       Preloader(v-if="!isWebsiteLoaded")
@@ -22,9 +23,10 @@
         ArrowsNav
 
         div.content-area
-          div.animated-sections
-            keep-alive
-              router-view
+          div.sections
+            transition(name="fade" mode="out-in")
+              keep-alive
+                router-view(:key="$route.name")
 </template>
 <script>
 import Preloader from '@/components/HomepageTemplate/Preloader';
@@ -72,9 +74,7 @@ export default {
       this.isWebsiteLoaded = true;
     },
     closeMenu() {
-      if (this.isMenuOpen) {
-        this.isMenuOpen = false;
-      }
+      this.isMenuOpen = false;
     },
   },
 };
@@ -93,6 +93,9 @@ export default {
   background-size: cover;
   background-repeat: no-repeat;
   z-index: -1;
+  @include respond-to(sm) {
+    display: none;
+  }
 }
 
 .page {
@@ -102,6 +105,12 @@ export default {
   min-height: 100%;
   padding: 0 100px;
   overflow: hidden;
+  @include respond-to(md) {
+    padding-left: 30px;
+  }
+  @include respond-to(sm) {
+    padding: 0;
+  }
   .page-content {
     position: relative;
     width: 100%;
@@ -109,35 +118,10 @@ export default {
     min-height: 80vh;
     margin: 10vh auto;
     padding: 0;
-    background-color: #444;
+    background-color: $color-onyx;
     box-shadow: 0 0 100px -5px rgba(0, 0, 0, 0.25);
     border-radius: 32px;
-    // -webkit-backface-visibility: hidden;
-    // -moz-backface-visibility: hidden;
-    // backface-visibility: hidden;
-  }
-
-  .content-area {
-    position: absolute;
-    right: 0;
-    background-color: transparent;
-    height: 100%;
-    width: 100%;
-    max-width: calc(100% - 380px);
-  }
-  @include respond-to(md) {
-    padding-left: 30px;
-    .header {
-      max-width: 330px;
-    }
-
-    .content-area {
-      max-width: calc(100% - 330px);
-    }
-  }
-  @include respond-to(sm) {
-    padding: 0;
-    .page-content {
+    @include respond-to(sm) {
       padding: 0;
       margin: 0;
       border-radius: 0;
@@ -146,74 +130,113 @@ export default {
         max-height: stretch;
       }
     }
-    .content-area {
-      max-width: 100%;
-    }
   }
 }
 
-.menu-toggle {
-  display: none;
-  width: 48px;
-  height: 48px;
-  line-height: 46px;
-  text-align: center;
-  background-color: #0ba376;
-  right: 10px;
-  font-size: 19px;
-  top: 10px;
-  border-radius: 30px;
-  transform: rotate(0deg);
-  transition: 0.5s ease-in-out;
-  cursor: pointer;
-  z-index: 900;
-  position: absolute;
-  span {
-    display: block;
-    position: absolute;
-    height: 3px;
-    width: 50%;
-    background: #fff;
-    border-radius: 5px;
-    opacity: 1;
-    left: 25%;
+.page-content {
+  .menu-toggle {
+    display: none;
+    width: 48px;
+    height: 48px;
+    line-height: 46px;
+    text-align: center;
+    background-color: $color-greenMunsell;
+    right: 10px;
+    font-size: 19px;
+    top: 10px;
+    border-radius: 30px;
     transform: rotate(0deg);
-    transition: 0.25s ease-in-out;
-    &:nth-child(1) {
-      top: 16px;
-      transform-origin: left center;
-    }
-    &:nth-child(2) {
-      top: 22px;
-      transform-origin: left center;
-    }
-    &:nth-child(3) {
-      top: 28px;
-      transform-origin: left center;
-    }
-  }
-  &.open {
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+    z-index: 900;
+    position: absolute;
     span {
+      display: block;
+      position: absolute;
+      height: 3px;
+      width: 50%;
+      background: $color-white;
+      border-radius: 5px;
+      opacity: 1;
+      left: 25%;
+      transform: rotate(0deg);
+      transition: 0.25s ease-in-out;
+      transform-origin: left center;
       &:nth-child(1) {
-        transform: rotate(45deg);
-        top: 13px;
-        left: 15px;
+        top: 16px;
       }
       &:nth-child(2) {
-        width: 0%;
-        opacity: 0;
+        top: 22px;
       }
       &:nth-child(3) {
-        transform: rotate(-45deg);
-        top: 30px;
-        left: 15px;
+        top: 28px;
       }
     }
+    &.open {
+      span {
+        &:nth-child(1) {
+          transform: rotate(45deg);
+          top: 13px;
+          left: 15px;
+        }
+        &:nth-child(2) {
+          width: 0%;
+          opacity: 0;
+        }
+        &:nth-child(3) {
+          transform: rotate(-45deg);
+          top: 30px;
+          left: 15px;
+        }
+      }
+    }
+    @include respond-to(sm) {
+      display: block;
+    }
   }
-}
-@include respond-to(sm) {
-  .menu-toggle {
-    display: block;
+  .content-area {
+    position: absolute;
+    right: 0;
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    max-width: calc(100% - 380px);
+    @include respond-to(md) {
+      max-width: calc(100% - 330px);
+    }
+    @include respond-to(sm) {
+      max-width: 100%;
+    }
+    .sections {
+      position: relative;
+      height: 100%;
+      perspective: 1500px;
+      background-color: $color-eerieBlack;
+      border-radius: 30px;
+      @include respond-to(sm) {
+        border-radius: 0;
+      }
+      & > section {
+        position: absolute;
+
+        height: 100%;
+        width: 100%;
+
+        padding: 60px;
+        overflow: auto;
+        z-index: 999;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-position: 50% 50%;
+        background-size: cover;
+        overflow: auto;
+        visibility: visible;
+        z-index: 99;
+        &.scroll-lock {
+          overflow: hidden;
+        }
+      }
+    }
   }
 }
 </style>

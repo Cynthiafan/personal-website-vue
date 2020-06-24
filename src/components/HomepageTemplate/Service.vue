@@ -37,3 +37,27 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.info-block-w-icon {
+  margin-bottom: 25px;
+  .ci-text {
+    h4 {
+      margin: 5px 0;
+    }
+    p {
+      font-size: 0.95em;
+    }
+  }
+  .ci-icon {
+    display: table-cell;
+    width: 54px;
+    padding-right: 25px;
+  }
+  i {
+    position: relative;
+    font-size: 42px;
+    color: $color-greenMunsell;
+    opacity: 0.7;
+  }
+}
+</style>

@@ -1,28 +1,27 @@
 <template lang="pug">
-  section.animated-section(ref="portfolio" :class="{ 'scroll-lock': demoSource }")
+  section(ref="portfolio" :class="{ 'scroll-lock': demoSource }")
     div.page-title
       h2 Portfolio
 
-    div.section-content
-      div.row
-        div.col-xs-12.col-sm-12
-          div.blog-masonry
-            
-            div.item(v-for="item in $store.state.portfolio" :key="item.title")
-              div.blog-card
+    div.row
+      div.col-xs-12.col-sm-12
+        div.blog-masonry
+          
+          div.item(v-for="item in $store.state.portfolio" :key="item.title")
+            div.blog-card
 
-                div.media-block
-                  button.action-btn(v-if="item.action" @click="clickActionBtn(item.action)") {{ item.action.text }}
-                  img(style="width: 100%" :src="require(`../../assets/images/${item.img}`)" :alt="item.title")
-                  div.mask
+              div.media-block
+                button.action-btn(v-if="item.action" @click="clickActionBtn(item.action)") {{ item.action.text }}
+                img(style="width: 100%" :src="require(`../../assets/images/${item.img}`)" :alt="item.title")
+                div.mask
 
-                div.post-info
-                  div.blog-item-title-group
-                    h4.blog-item-title {{ $_handleI18n(item, page, 'title') }}
-                    a(:href="item.repoUrl" v-if="item.repoUrl")
-                      font-awesome-icon(:icon="['fab', 'github']")
-                  div.blog-tags
-                    span(v-for="tag in item.tags" :key="tag") {{ tag }}
+              div.post-info
+                div.blog-item-title-group
+                  h4.blog-item-title {{ $_handleI18n(item, page, 'title') }}
+                  a(:href="item.repoUrl" v-if="item.repoUrl")
+                    font-awesome-icon(:icon="['fab', 'github']")
+                div.blog-tags
+                  span(v-for="tag in item.tags" :key="tag") {{ tag }}
 
     transition(name="fade")
       div.subpage-modal(v-if="demoSource" :style="isLaptopSize ? `top: ${scrollTop}px` : ''")
@@ -83,6 +82,9 @@ export default {
   .item {
     width: 50%;
     padding: 0 1em 2em;
+    @include respond-to(ssm) {
+      width: 100%;
+    }
   }
 }
 
@@ -90,7 +92,7 @@ export default {
   display: block;
   position: relative;
   padding: 0;
-  background: #444;
+  background: $color-onyx;
   .media-block {
     overflow: hidden;
     position: relative;
@@ -115,8 +117,8 @@ export default {
       min-width: 100px;
       transform: translate(-50%, -50%);
       border-radius: 40px;
-      border: 1px solid #fff;
-      color: #fff;
+      border: 1px solid $color-white;
+      color: $color-white;
       background-color: transparent;
       padding: 4px 10px;
       font-size: 13px;
@@ -132,16 +134,19 @@ export default {
   }
   .post-info {
     padding: 1em 1.4em 1.4em;
-    border: 1px solid #444;
+    border: 1px solid $color-onyx;
     border-top: 0;
     a {
-      color: #fff;
+      color: $color-white;
       font-size: 18px;
     }
     .blog-item-title-group {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      .blog-item-title {
+        margin: 5px 0 0 0;
+      }
     }
     .blog-tags {
       display: flex;
@@ -163,20 +168,6 @@ export default {
         margin-right: 5px;
       }
     }
-  }
-  .blog-item-title {
-    margin: 5px 0 0 0;
-  }
-}
-
-@include respond-to(ssm) {
-  .blog-post-content {
-    padding: 0;
-    margin: 30px 0 0;
-  }
-
-  .blog-masonry .item {
-    width: 100%;
   }
 }
 

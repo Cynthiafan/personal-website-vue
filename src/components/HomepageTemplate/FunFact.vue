@@ -10,7 +10,7 @@ div
   div.row
 
     div.col-xs-12.col-lg-4.col-md-6
-      div.fun-fact.gray-default
+      div.fun-fact
         div.icon
           font-awesome-icon(:icon="['fas', 'volleyball-ball']")
         h4 {{ $t(`${page}.volleyball`) }}
@@ -18,7 +18,7 @@ div
         span.fun-fact-block-text {{ $t(`${page}.volleyballDescription`) }}
 
     div.col-xs-12.col-lg-4.col-md-6
-      div.fun-fact.gray-default
+      div.fun-fact
         div.icon
           font-awesome-icon(:icon="['fas', 'puzzle-piece']")
         h4 {{ $t(`${page}.jigsawPuzzle`) }}
@@ -26,7 +26,7 @@ div
         span.fun-fact-block-text {{ $t(`${page}.jigsawPuzzleDescription`) }}
 
     div.col-xs-12.col-lg-4.col-md-6
-      div.fun-fact.gray-default
+      div.fun-fact
         div.icon
           font-awesome-icon(:icon="['fas', 'film']")
         h4 {{ $t(`${page}.movieAppreciation`) }}
@@ -48,9 +48,9 @@ export default {
   width: 100%;
   display: block;
   margin: 0 0 15px;
-  background: #333;
+  background: $color-jet;
   padding: 25px 10px 15px;
-  border: 2px solid #444;
+  border: 2px solid $color-onyx;
   border-radius: 10px;
   box-shadow: none;
   overflow: hidden;
@@ -59,17 +59,10 @@ export default {
     transform: translateY(-5px);
     box-shadow: 0 12px 17px rgba(0, 0, 0, 0.12);
   }
-  .gray-bg {
-    background-color: #fcfcfc;
-  }
-  h4 {
-    font-size: 16px;
-    margin: 15px;
-  }
   .icon {
     position: relative;
     font-size: 33px;
-    color: #0ba376;
+    color: $color-greenMunsell;
     margin-bottom: 6px;
     text-align: center;
     svg {
@@ -77,21 +70,17 @@ export default {
       height: 33px;
     }
   }
-  .lm-info-block {
-    font-size: 24px;
-    font-weight: 400;
-    display: block;
-    margin: 10px 0;
-    color: #0ba376;
+  h4 {
+    font-size: 16px;
+    margin: 15px;
   }
   .fun-fact-block-value {
-    color: #aaa;
+    color: $color-silverChalice;
     font-size: 36px;
     line-height: 50px;
     display: block;
     margin: 15px 0 10px;
   }
-
   .fun-fact-block-text {
     display: block;
   }

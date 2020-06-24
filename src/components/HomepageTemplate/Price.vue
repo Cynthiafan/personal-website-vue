@@ -71,7 +71,7 @@
             content: '';
             height: 2px;
             margin-top: 0;
-            background-color: #0ba376;
+            background-color: $color-greenMunsell;
             position: absolute;
             left: 0;
             bottom: -3px;

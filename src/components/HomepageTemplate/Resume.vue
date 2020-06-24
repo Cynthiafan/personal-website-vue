@@ -1,5 +1,5 @@
 <template lang="pug">
-  section.animated-section(data-id="resume")
+  section
     div.page-title
       h2 Resume
 
@@ -78,3 +78,17 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.knowledges {
+  list-style: none;
+  li {
+    display: inline-block;
+    background-color: $color-greenMunsell;
+    border-radius: 3px;
+    color: $color-white;
+    padding: 1px 10px;
+    margin: 3px 2px;
+    font-size: 13px;
+  }
+}
+</style>
