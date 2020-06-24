@@ -11,8 +11,8 @@ export default {
 
 <style lang="scss">
 body {
-  background-color: $color-body-bg;
-  background: $color-body-gradient;
+  background-color: $color-greenMunsell;
+  background: linear-gradient($color-ming, $color-greenMunsell);
   margin: 0;
   width: 100%;
   height: 100%;
@@ -21,7 +21,7 @@ body {
   font-family: 'Poppins', Helvetica, sans-serif;
   line-height: 1.65em;
   overflow: hidden;
-  color: #d5d5d5;
+  color: $color-lightgray;
   background-repeat: no-repeat;
   background-position: center;
   background-position: 50% 50%;

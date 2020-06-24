@@ -1,5 +1,5 @@
 <template lang="pug">
-  div.timeline.timeline-second-style.clearfix
+  div.timeline.clearfix
 
     div.timeline-item.clearfix(v-for="item in list" :key="item.company")
       div.left-part
@@ -23,7 +23,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.timeline-second-style {
+.timeline {
   .timeline-item {
     position: relative;
     display: table;
@@ -34,6 +34,10 @@ export default {
     .right-part {
       padding-bottom: 0;
     }
+    @include respond-to(ss) {
+      position: relative;
+      display: block;
+    }
   }
   .left-part {
     width: 30%;
@@ -42,6 +46,13 @@ export default {
     min-height: 100%;
     text-align: right;
     vertical-align: top;
+    @include respond-to(ss) {
+      width: 100%;
+      display: block;
+      padding-left: 25px;
+      min-height: 100%;
+      text-align: left;
+    }
   }
   .right-part {
     width: 70%;
@@ -53,6 +64,12 @@ export default {
     p > * {
       font-size: 0.92em;
     }
+    @include respond-to(ss) {
+      width: 100%;
+      display: block;
+      padding-left: 25px;
+      padding-right: 0;
+    }
   }
   .divider {
     position: absolute;
@@ -60,7 +77,10 @@ export default {
     left: 30%;
     bottom: 0;
     width: 1px;
-    background-color: #444;
+    background-color: $color-onyx;
+    @include respond-to(ss) {
+      left: 0;
+    }
     &:before {
       content: '';
       display: block;
@@ -71,7 +91,7 @@ export default {
       position: absolute;
       margin-left: -8px;
       border-radius: 10px;
-      background-color: #0ba376;
+      background-color: $color-greenMunsell;
       opacity: 0.25;
       z-index: 0;
     }
@@ -83,26 +103,10 @@ export default {
       width: 9px;
       height: 9px;
       margin-left: -4px;
-      background-color: #222;
+      background-color: $color-eerieBlack;
       border-radius: 5px;
-      border: 2px solid #0ba376;
+      border: 2px solid $color-greenMunsell;
       z-index: 1;
-    }
-  }
-  @include respond-to(ss) {
-    .left-part {
-      width: 26%;
-      padding-left: 0;
-      .item-company {
-        word-break: break-all;
-      }
-    }
-    .divider {
-      left: 26%;
-    }
-    .right-part {
-      width: 71%;
-      padding-left: 15px;
     }
   }
   .item-title {
@@ -116,7 +120,7 @@ export default {
     padding-bottom: 10px;
   }
   .item-period {
-    color: #aaa;
+    color: $color-silverChalice;
     margin: 3px 0;
     font-size: 14px;
     line-height: 1.4em;
@@ -127,7 +131,8 @@ export default {
     font-size: 13px;
     font-weight: 300;
     line-height: 1.45em;
-    color: #a5a6a7;
+    color: $color-quickSilver;
+    word-break: break-all;
   }
   .item-logo {
     display: block;

@@ -60,7 +60,7 @@ export default {
       font-size: 30px;
       right: 0;
       top: 7px;
-      color: #0ba376;
+      color: $color-greenMunsell;
       opacity: 0.5;
     }
     .author {
