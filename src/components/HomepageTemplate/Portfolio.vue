@@ -50,7 +50,8 @@ export default {
     clickActionBtn(action) {
       switch (action.type) {
         case 'url':
-          window.open(action.url, '_blank');
+          const newPage = window.open(action.url, '_blank');
+          newPage.opener = null;
           break;
         case 'video':
           this.demoSource = require(`../../assets/images/${action.video}`);
