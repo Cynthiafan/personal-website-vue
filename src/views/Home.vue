@@ -1,10 +1,5 @@
 <template lang="pug">
   div
-
-    //- Loading animation 
-    transition(name="fade" mode="out-in")
-      Preloader(v-if="!isWebsiteLoaded")
-
     //- Animated Background 
     div.lm-animated-bg 
 
@@ -29,7 +24,6 @@
                 router-view(:key="$route.name")
 </template>
 <script>
-import Preloader from '@/components/HomepageTemplate/Preloader';
 import NavHeader from '@/components/HomepageTemplate/NavHeader';
 import ArrowsNav from '@/components/HomepageTemplate/ArrowsNav';
 import { mapGetters } from 'vuex';
@@ -37,13 +31,11 @@ import device from 'current-device';
 
 export default {
   components: {
-    Preloader,
     NavHeader,
     ArrowsNav,
   },
   data() {
     return {
-      isWebsiteLoaded: false,
       isMenuOpen: false,
     };
   },
@@ -58,21 +50,12 @@ export default {
       this.closeMenu();
     },
   },
-  mounted() {
-    window.addEventListener('load', this.closePreloader);
-  },
   beforeRouteUpdate(to, from, next) {
     this.closeMenu();
 
     next();
   },
-  beforeDestroy() {
-    window.removeEventListener('load', this.closePreloader);
-  },
   methods: {
-    closePreloader() {
-      this.isWebsiteLoaded = true;
-    },
     closeMenu() {
       this.isMenuOpen = false;
     },

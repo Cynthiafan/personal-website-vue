@@ -17,6 +17,10 @@ module.exports = {
       .use('raw-loader')
       .loader('raw-loader')
       .end();
+
+    // config
+    //   .plugin('webpack-bundle-analyzer')
+    //   .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin);
   },
 
   pluginOptions: {

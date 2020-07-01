@@ -148,16 +148,16 @@ export default new Vuex.Store({
         },
         i18n: true,
       },
-      {
-        title: 'freecell',
-        img: 'portfolio-freecell.png',
-        tags: ['vue'],
-        repoUrl: 'https://github.com/Cynthiafan/personal-website-vue/tree/master/src/views/FreeCell',
-        action: {
-          text: 'Visit', type: 'url', url: 'https://cynthiafan.com/f2e-challenge/free-cell',
-        },
-        i18n: true,
-      },
+      // {
+      //   title: 'freecell',
+      //   img: 'portfolio-freecell.png',
+      //   tags: ['vue'],
+      //   repoUrl: 'https://github.com/Cynthiafan/personal-website-vue/tree/master/src/views/FreeCell',
+      //   action: {
+      //     text: 'Visit', type: 'url', url: 'https://cynthiafan.com/f2e-challenge/free-cell',
+      //   },
+      //   i18n: true,
+      // },
       {
         title: 'personalWeb',
         img: 'portfolio-personal-web.png',

@@ -8,6 +8,7 @@
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "deploy:netlify": "yarn storybook:build && yarn build",
+    "serve:build": "serve -s dist",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
     "storybook:build": "vue-cli-service storybook:build -c config/storybook -o public/storybook",
     "storybook:serve": "vue-cli-service storybook:serve -p 6006 -c config/storybook"
@@ -39,6 +40,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.8.7",
+    "@fullhuman/postcss-purgecss": "^2.1.0",
+    "@fullhuman/vue-cli-plugin-purgecss": "~2.2.0",
     "@storybook/addon-actions": "^5.3.17",
     "@storybook/addon-knobs": "^5.3.17",
     "@storybook/addon-links": "^5.3.17",
