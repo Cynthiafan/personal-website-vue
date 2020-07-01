@@ -29,7 +29,7 @@
     div.social-links
       ul
         li(v-for="link in $store.state.links" :key="link.key")
-          a(:href="link.url" target="_blank" ref="noopener noreferrer")
+          a(:href="link.url" target="_blank" rel="noopener noreferrer")
             font-awesome-icon(:icon="link.icon")
 
     div.header-buttons
