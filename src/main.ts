@@ -16,7 +16,7 @@ import '@/mixins';
 
 library.add(faGithub, faLinkedinIn, faEnvelope, faQuoteRight, faVolleyballBall, faPuzzlePiece, faFilm, faGlobe);
 
-if (process.env.NETLIFY) {
+if (process.env.NODE_ENV === 'production') {
   Vue.use(VueAnalytics, {
     id: 'UA-91843640-4',
     router,
