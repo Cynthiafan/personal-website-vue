@@ -20,10 +20,14 @@ const routes = [
     component: lazyLoading('Home'),
     children: homepageChildren,
   },
+  // {
+  //   path: '/f2e-challenge/free-cell',
+  //   name: 'freeCell',
+  //   component: lazyLoading('FreeCell', true),
+  // },
   {
-    path: '/f2e-challenge/free-cell',
-    name: 'freeCell',
-    component: lazyLoading('FreeCell', true),
+    path: '*',
+    redirect: '/',
   },
 ];
 

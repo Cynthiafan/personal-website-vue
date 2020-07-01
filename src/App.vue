@@ -1,11 +1,35 @@
 <template lang="pug">
   div#app
+    //- Loading animation 
+    transition(name="fade" mode="out-in")
+      Preloader(v-if="!isWebsiteLoaded")
     router-view
 </template>
 
 <script>
+import Preloader from '@/components/HomepageTemplate/Preloader';
+
 export default {
   name: 'app',
+  data() {
+    return {
+      isWebsiteLoaded: false,
+    };
+  },
+  components: {
+    Preloader,
+  },
+  mounted() {
+    window.addEventListener('load', this.closePreloader);
+  },
+  beforeDestroy() {
+    window.removeEventListener('load', this.closePreloader);
+  },
+  methods: {
+    closePreloader() {
+      this.isWebsiteLoaded = true;
+    },
+  },
 };
 </script>
 

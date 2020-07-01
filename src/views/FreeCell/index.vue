@@ -146,6 +146,7 @@ export default {
     showRules() {
       this.setPopupStatus(popupSetting.rule);
     },
+    // FIXME: dragStart the bottom cards then dragEnd occurs the card disappear
     changeCardPlace(movingCard, targetPlace, isUndo = false) {
       if (!isUndo && !this.checkIsMovementValid(movingCard, targetPlace)) {
         return;
