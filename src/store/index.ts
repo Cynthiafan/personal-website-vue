@@ -124,7 +124,7 @@ export default new Vuex.Store({
         tags: ['storybook', 'd3.js'],
         repoUrl: 'https://github.com/Cynthiafan/personal-website-vue',
         action: {
-          text: 'Visit', type: 'url', url: '/storybook/index.html',
+          text: 'Visit', type: 'url', url: '/storybook',
         },
         i18n: true,
       },
