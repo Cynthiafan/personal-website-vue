@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    div.pie-chart(v-if="isDrawable" :class="`legend--${legendPosition}`")
+    div.pie-chart(v-if="isDrawable" :class="`dynamic-legend--${legendPosition}`")
       Legends(:id="`legend-${id}`"
         v-if="showLegends"
         v-model="selectedIndex"
@@ -487,7 +487,7 @@ export default {
   width: 100%;
   position: relative;
   display: flex;
-  &.legend {
+  &.dynamic-legend {
     &--top {
       flex-direction: column;
       justify-content: center;
