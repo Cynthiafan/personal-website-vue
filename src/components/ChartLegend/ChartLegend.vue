@@ -108,7 +108,7 @@ export default {
     },
     focusLegend() {
       d3.select(`#${this.id}`)
-        .selectAll('.legends__group')
+        .selectAll('.dynamic-legends__group')
         .style('border-color', (d, i) => {
           if (i === this.selectedIndex) {
             return d.color || this.colors(i);
