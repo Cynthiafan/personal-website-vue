@@ -25,6 +25,10 @@ const routes = [
   //   name: 'freeCell',
   //   component: lazyLoading('FreeCell', true),
   // },
+  {
+    path: '*',
+    redirect: '/',
+  },
 ];
 
 const router = new VueRouter({
