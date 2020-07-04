@@ -64,7 +64,7 @@ export default {
         .data(this.dataset)
         .enter()
         .append('div')
-        .attr('class', 'legends__group');
+        .attr('class', 'dynamic-legends__group');
 
       if (this.type === 'line') {
         legends
@@ -129,7 +129,7 @@ export default {
   flex-wrap: wrap;
   justify-content: center;
   margin: 0;
-  /deep/ &__group {
+  /deep/ .dynamic-legends__group {
     display: flex;
     align-items: center;
     justify-content: center;
