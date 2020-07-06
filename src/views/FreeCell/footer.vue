@@ -120,6 +120,7 @@ export default {
   padding: 20px 0;
   margin: 0 auto;
   width: calc(100% - 200px);
+  color: $fc-black;
   border-top: 1px solid $fc-darkgray;
   &__left {
     @include flex(flex-start, center, row);

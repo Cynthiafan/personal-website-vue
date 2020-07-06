@@ -56,6 +56,7 @@ export default {
   width: 100vw;
   height: 100vh;
   background: rgba($fc-black, 0.7);
+  color: $fc-black;
   position: fixed;
   left: 0;
   top: 0;

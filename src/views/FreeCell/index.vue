@@ -146,7 +146,6 @@ export default {
     showRules() {
       this.setPopupStatus(popupSetting.rule);
     },
-    // FIXME: dragStart the bottom cards then dragEnd occurs the card disappear
     changeCardPlace(movingCard, targetPlace, isUndo = false) {
       if (!isUndo && !this.checkIsMovementValid(movingCard, targetPlace)) {
         return;
@@ -329,6 +328,8 @@ export default {
       document.removeEventListener('mousemove', this.getMousePosition);
       this.draggingCards.forEach((card) => {
         card.classList.remove('dragging');
+        card.style.left = 'auto';
+        card.style.top = 'auto';
       });
     },
     // act when double clicking the cards
@@ -488,10 +489,11 @@ export default {
           return !isTargetACard && isOneCardOnly && !isFromSamePosition;
         },
         cards: () => {
-          /* moving to bottom area has 3 situations:
+          /* moving to bottom area has 4 situations:
            * a. move to card
            * b. move to column which has cards
            * c. move to empty column
+           * d. unmove
            */
           const isEmptyColumn = target.classList.contains('empty');
 
@@ -526,18 +528,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+/* purgecss start ignore */
 * {
   box-sizing: border-box;
   -webkit-user-select: none;
+  font-family: 'Lato';
 }
 
 /deep/ button {
   background: $fc-black;
   color: #fff;
-  padding: 12px 30px;
+  padding: 10px 30px;
   border-radius: 50px;
   transition: 0.2s;
   font-weight: bold;
+  font-size: 12px;
   letter-spacing: 1px;
   border: none;
   &:hover {
@@ -551,7 +556,6 @@ export default {
 }
 
 .free-cell {
-  font-family: 'Lato';
   background: $fc-gray;
   height: 100vh;
   width: 100vw;
@@ -561,6 +565,7 @@ export default {
   position: relative;
   img {
     width: 95px;
+    border: none;
     &.dragging {
       position: absolute;
       transform: translate(0, 0) !important;
@@ -601,6 +606,7 @@ export default {
         font-weight: bold;
         margin-top: 5px;
         letter-spacing: 2px;
+        color: $fc-black;
       }
     }
     &__home-area {
@@ -674,4 +680,5 @@ export default {
     }
   }
 }
+/* purgecss end ignore */
 </style>
