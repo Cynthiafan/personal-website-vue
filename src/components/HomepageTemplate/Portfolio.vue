@@ -184,11 +184,11 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  border-radius: 30px;
   button {
     position: absolute;
     right: 20px;
     top: 20px;
-
     border: none;
     margin-top: 10px;
     padding: 10px;
