@@ -32,8 +32,8 @@
           a(:href="link.url" target="_blank" rel="noopener noreferrer")
             font-awesome-icon(:icon="link.icon")
 
-    div.header-buttons
-      a.download-btn(download="Frontend_Cynthia" :href="`/resume/${locale}_202005.pdf`") {{ $t(`${page}.downloadCV`) }}
+    //- div.header-buttons
+    //-   a.download-btn(download="Frontend_Cynthia" :href="`/resume/${locale}_202005.pdf`") {{ $t(`${page}.downloadCV`) }}
 
     div.copyrights {{ currentYear }} All rights reserved.
 </template>

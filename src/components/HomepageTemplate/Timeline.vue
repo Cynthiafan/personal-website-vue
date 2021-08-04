@@ -4,7 +4,8 @@
     div.timeline-item.clearfix(v-for="item in list" :key="item.company")
       div.left-part
         h5.item-period {{ item.period.start }} - {{ item.period.end }}
-        span.item-company {{ $_handleI18n(item, page, 'company') }}
+        a(:href="item.url" target="_blank")
+          span.item-company {{ $_handleI18n(item, page, 'company') }}
       div.divider
       div.right-part
         h4.item-title {{ $_handleI18n(item, page, 'title') }}

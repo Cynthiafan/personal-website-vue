@@ -7,21 +7,57 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     blocks: [
-      { path: '/', text: 'home', icon: 'lnr-home', componentName: 'Landing', i18n: true },
-      { path: '/about', text: 'about', icon: 'lnr-user', componentName: 'About', i18n: true },
-      { path: '/resume', text: 'resume', icon: 'lnr-briefcase', componentName: 'Resume', i18n: true },
-      { path: '/portfolio', text: 'portfolio', icon: 'lnr-book', componentName: 'Portfolio', i18n: true },
+      {
+        path: '/',
+        text: 'home',
+        icon: 'lnr-home',
+        componentName: 'Landing',
+        i18n: true,
+      },
+      {
+        path: '/about',
+        text: 'about',
+        icon: 'lnr-user',
+        componentName: 'About',
+        i18n: true,
+      },
+      {
+        path: '/resume',
+        text: 'resume',
+        icon: 'lnr-briefcase',
+        componentName: 'Resume',
+        i18n: true,
+      },
+      {
+        path: '/portfolio',
+        text: 'portfolio',
+        icon: 'lnr-book',
+        componentName: 'Portfolio',
+        i18n: true,
+      },
       // { path: '/contact', text: 'Contact', icon: 'lnr-envelope', componentName: 'Contact' },
     ],
     links: [
-      { key: 'linkedIn', url: 'https://www.linkedin.com/in/fanyatang/', icon: ['fab', 'linkedin-in'] },
-      { key: 'github', url: 'https://github.com/Cynthiafan', icon: ['fab', 'github'] },
-      { key: 'email', url: 'mailto:cynthiafan1230@gmail.com', icon: ['far', 'envelope'] },
+      {
+        key: 'linkedIn',
+        url: 'https://www.linkedin.com/in/fanyatang/',
+        icon: ['fab', 'linkedin-in'],
+      },
+      {
+        key: 'github',
+        url: 'https://github.com/Cynthiafan',
+        icon: ['fab', 'github'],
+      },
+      {
+        key: 'email',
+        url: 'mailto:cynthiafan1230@gmail.com',
+        icon: ['far', 'envelope'],
+      },
     ],
     information: [
       { title: 'Location', value: 'location', i18n: true },
       { title: 'e-mail', value: 'cynthiafan1230@gmail.com' },
-      { title: 'Status', value: 'HIRABLE' },
+      { title: 'Status', value: '👋 HIRABLE' },
     ],
     testimonials: [
       {
@@ -41,7 +77,22 @@ export default new Vuex.Store({
       { label: 'Mongo/Mongoose', value: '10%' },
     ],
     preloaderMs: 3000,
-    knowledgeTags: ['Git/Git flow', 'storybook', 'vuepress', 'fp', 'Heroku', 'Netlify', 'AWS EC2', 'Google Apps Script', 'Adobe XD', 'Sketch', 'MacOs', 'Social Marketing', 'Google analytics', 'Sense of UI/UX'],
+    knowledgeTags: [
+      'Git/Git flow',
+      'storybook',
+      'vuepress',
+      'fp',
+      'Heroku',
+      'Netlify',
+      'AWS EC2',
+      'Google Apps Script',
+      'Adobe XD',
+      'Sketch',
+      'MacOs',
+      'Social Marketing',
+      'Google analytics',
+      'Sense of UI/UX',
+    ],
     education: [
       {
         company: 'colleage',
@@ -66,8 +117,30 @@ export default new Vuex.Store({
     ],
     experience: [
       {
+        company: 'aotter',
+        url: 'https://aotter.net/',
+        title: 'frontendEngineer',
+        period: {
+          start: '2020',
+          end: 'present',
+        },
+        description: 'aotterJD',
+        i18n: true,
+      },
+      {
+        company: 'iStaging',
+        url: 'https://www.istaging.com/',
+        title: 'frontendEngineer',
+        period: {
+          start: '2020',
+          end: '2020',
+        },
+        description: 'iStagingJD',
+        i18n: true,
+      },
+      {
         company: 're',
-        url: '',
+        url: 'https://myre.life/',
         title: 'frontendEngineer',
         period: {
           start: '2018',
@@ -78,7 +151,7 @@ export default new Vuex.Store({
       },
       {
         company: 'crowdinsight',
-        url: '',
+        url: 'https://www.crowdinsight.com.tw/',
         title: 'frontendEngineer',
         period: {
           start: '2017',
@@ -89,7 +162,7 @@ export default new Vuex.Store({
       },
       {
         company: 'lovemove',
-        url: '',
+        url: 'https://www.facebook.com/VolleyCube',
         title: 'marketingManagement',
         period: {
           start: '2016',
@@ -100,7 +173,14 @@ export default new Vuex.Store({
       },
     ],
     certificates: [
-      { title: 'topik', logo: '', logoAlt: 'TOPIK', id: 'Level 3', year: '2015', i18n: true },
+      {
+        title: 'topik',
+        logo: '',
+        logoAlt: 'TOPIK',
+        id: 'Level 3',
+        year: '2015',
+        i18n: true,
+      },
     ],
     languages: [
       { label: 'mandarin', text: 'native', value: '100%', i18n: true },
@@ -114,7 +194,9 @@ export default new Vuex.Store({
         tags: ['vuepress', 'netlify'],
         repoUrl: 'https://github.com/Cynthiafan/tech-blog',
         action: {
-          text: 'Visit', type: 'url', url: 'https://blog.cynthiafan.com',
+          text: 'Visit',
+          type: 'url',
+          url: 'https://blog.cynthiafan.com',
         },
         i18n: true,
       },
@@ -124,7 +206,9 @@ export default new Vuex.Store({
         tags: ['storybook', 'd3.js'],
         repoUrl: 'https://github.com/Cynthiafan/personal-website-vue',
         action: {
-          text: 'Visit', type: 'url', url: '/storybook',
+          text: 'Visit',
+          type: 'url',
+          url: '/storybook',
         },
         i18n: true,
       },
@@ -134,7 +218,9 @@ export default new Vuex.Store({
         tags: ['line bot', 'express', 'mLab', 'heroku'],
         repoUrl: 'https://github.com/Cynthiafan/line-bot-api',
         action: {
-          text: 'View Demo', type: 'video', video: 'portfolio-line-bot.gif',
+          text: 'View Demo',
+          type: 'video',
+          video: 'portfolio-line-bot.gif',
         },
         i18n: true,
       },
@@ -144,7 +230,10 @@ export default new Vuex.Store({
         tags: ['line notify', 'Google Apps Script'],
         repoUrl: '',
         action: {
-          text: 'View Note', type: 'url', url: 'https://blog.cynthiafan.com/posts/lets-do-it/line-notify-gas.html',
+          text: 'View Note',
+          type: 'url',
+          url:
+            'https://blog.cynthiafan.com/posts/lets-do-it/line-notify-gas.html',
         },
         i18n: true,
       },
@@ -184,6 +273,5 @@ export default new Vuex.Store({
       setI18nLocale(lang);
     },
   },
-  modules: {
-  },
+  modules: {},
 });
