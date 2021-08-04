@@ -8,7 +8,7 @@
     "frontendDeveloper": "Front-end Developer"
   },
   "about": {
-    "intro": "I’m a creative and enthusiastic front-end developer with 2+ years of experience building and maintaining responsive websites/applications. I have strong experience with aesthetics and interaction, as well as commitment to the best experience for all users. Diverse professional education experiences have enabled me to understand a variety of user viewpoints.",
+    "intro": "I’m a creative and enthusiastic front-end developer with 4+ years of experience building and maintaining responsive websites/applications. I have strong experience with aesthetics and interaction, as well as commitment to the best experience for all users. Diverse professional education experiences have enabled me to understand a variety of user viewpoints.",
     "location": "Taipei, Taiwan",
     "webDev": "Mainly focus on front-end development. Having a sensitivity to UI/UX, and strive to develop websites that both fashionable and well-performance. ",
     "copywriting": "High sensitivity to words, and good in writing copy and proofreading. Besides, capable to determine the style of writing according to the target audience, to ensure the style consistency and professionalism.",
@@ -22,6 +22,16 @@
     "movieAppreciationDescription": "Obsessed with metaphor and symbols of movies which can make me taste the movie over again and again."
   },
   "resume": {
+    "aotter": "Aotter",
+    "aotterJD": [
+      "參與產品的功能發想與規劃，並與其他前端及視覺設計討論 UI/UX 設計，以同時達到更好的使用者體驗及程式架構",
+      "負責開發企業用 UI library - Aotter-UI，目前發佈於 github packages"
+    ],
+    "iStaging": "iStaging",
+    "iStagingJD": [
+      "獨立開發結合 Agora 與 KRPano，打造同步帶看環景的視訊通話功能",
+      "維護不同產品，包含但不限於管理後台、webview APP"
+    ],
     "re": "RE",
     "frontendEngineer": "Front-end Engineer",
     "marketingManagement": "Marketing Management",
