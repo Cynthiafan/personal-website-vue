@@ -3,8 +3,8 @@ module.exports = {
     loaderOptions: {
       sass: {
         prependData: `
-          @import "@/assets/scss/reset.scss";
-          @import "@/assets/scss/main.scss";
+          @import '@/assets/scss/reset.scss';
+          @import '@/assets/scss/main.scss';
         `,
       },
     },
@@ -12,10 +12,10 @@ module.exports = {
 
   chainWebpack: (config) => {
     config.module
-      .rule("md")
+      .rule('md')
       .test(/\.md$/)
-      .use("raw-loader")
-      .loader("raw-loader")
+      .use('raw-loader')
+      .loader('raw-loader')
       .end();
 
     // config
@@ -25,9 +25,9 @@ module.exports = {
 
   pluginOptions: {
     i18n: {
-      locale: "en",
-      fallbackLocale: "en",
-      localeDir: "locales",
+      locale: 'en',
+      fallbackLocale: 'en',
+      localeDir: 'locales',
       enableInSFC: false,
     },
   },
