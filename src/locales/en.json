@@ -8,11 +8,11 @@
     "frontendDeveloper": "Front-end Developer"
   },
   "about": {
-    "intro": "I’m a creative and enthusiastic front-end developer with 4+ years of experience building and maintaining responsive websites/applications. I have strong experience with aesthetics and interaction, as well as commitment to the best experience for all users. Diverse professional education experiences have enabled me to understand a variety of user viewpoints.",
-    "location": "Taipei, Taiwan",
+    "intro": "I’m a Versatile frontend engineer with 5+ years of development experience in website and web application development, specializing in Vue.js and its ecosystem. Proficient in developing service-oriented websites targeting end users, with a strong emphasis on user experience, website performance, and SEO ranking. I am highly disciplined, responsible, and adaptable, capable of both collaborative teamwork and independent work. I enjoy working together in a team with a shared goal, but I am also very capable to work independently.",
+    "location": "Amsterdam, Netherlands 🇳🇱",
     "webDev": "Mainly focus on front-end development. Having a sensitivity to UI/UX, and strive to develop websites that both fashionable and well-performance. ",
     "copywriting": "High sensitivity to words, and good in writing copy and proofreading. Besides, capable to determine the style of writing according to the target audience, to ensure the style consistency and professionalism.",
-    "kentTestimonial": "Cynthia 在個人特質方面，文靜但不怯場，各種需表達的場合皆具有良好的表達與敘事能力，與同事合作共事氣氛十分融洽。在工作表現方面，思緒周延且具宏觀視野，做事細心有條理，是能分擔上司工作又能讓上司放心交辦重要任務的好夥伴。在專業技能方面，擁有扎實的 JavaScript 開發技能，具備有前端工程師應有的知識與技能，更難能可貴的是積極的充實自我，是個有實力又潛力無限的優秀工程師！",
+    "kentTestimonial": "(translated) Cynthia possesses personal qualities of being quiet but not shy, with excellent communication and storytelling skills in various situations that require expression. She works well with colleagues and creates a harmonious working atmosphere. In terms of job performance, she has thorough thinking and a broad perspective, demonstrating meticulousness and organization in her work. She is a reliable partner who can share the workload of her supervisor and handle important tasks with their trust. In terms of professional skills, she has a solid foundation in JavaScript development and possesses the knowledge and skills expected of a frontend engineer. What sets her apart is her proactive self-improvement, making her an outstanding engineer with both competence and limitless potential!",
     "kentTitle": "CTO of RE CO., Ltd.",
     "volleyball": "Volleyball",
     "volleyballDescription": "Used to be a setter in the department team. Even though not playing volleyball now, still love volleyball in other ways",
@@ -24,20 +24,29 @@
   "resume": {
     "aotter": "Aotter",
     "aotterJD": [
-      "參與產品的功能發想與規劃，並與其他前端及視覺設計討論 UI/UX 設計，以同時達到更好的使用者體驗及程式架構",
-      "負責開發企業用 UI library - Aotter-UI，目前發佈於 github packages"
+      "Designed, implemented, and maintained a UI framework for the brand identity, which is based on Chakra UI and published on Github packages, significantly reducing the time needed for developing platforms.",
+      "Optimized websites based on Google Core Web Vitals, including addressing issues related to LCP and CLS, generating effective webpage indexing, and improving website exposure by 20%.",
+      "Collaborated with the marketing team to optimize the user experience of URL shortener service, which makes 3x benefit profits year-over-year.",
+      "Integrated Google Adsense and Trek Ad into Google Ad Manager, and maintained customized code in Creative Template. Not only improve ad fill rate to nearly 100% but reduce maintenance time costs.",
+      "Mentored junior team members and helped them to adapt and catch up with the development schedule in 2 months by designing assignments relevant to company tech stacks and domain knowledge.",
+      "Maintained multiple products and developed new features, responsible for conducting code reviews to ensure code quality and feature completeness.",
+      "Technologies used: Vue.js, Nuxt.js, Node.js, TypeScript, Pinia, Vuex, Tailwindcss, Chakra UI, Storybook, Unit Test, Rollup, VuePress, Github Actions, Docker, Google Search Console, Google Ad Manager"
     ],
     "iStaging": "iStaging",
     "iStagingJD": [
-      "獨立開發結合 Agora 與 KRPano，打造同步帶看環景的視訊通話功能",
-      "維護不同產品，包含但不限於管理後台、webview APP"
+      "Independently developed a video calling system with synchronized panoramic views within three months, significantly expanding the business scope and potential market.",
+      "Participated in technology solution decision-making and developed an online webinar system.",
+      "Technologies used: Vue.js, Vuex, SCSS, Krpano, Agora, Functional Programming"
     ],
     "re": "RE",
     "frontendEngineer": "Front-end Engineer",
     "marketingManagement": "Marketing Management",
     "reJD": [
-      "Participated in brainstorming of products, discussed UI/UX design with other front-end developers and visual designers, worked to achieve improved user experiences and program structure",
-      "Developed and maintained several common-use components such as number keyboards and date range selectors"
+      "Participated in product ideation and planning, collaborating with other frontend developers and visual designers to discuss UI/UX design and achieve both better user experience and program architecture.",
+      "Utilized D3.js to process data visualization, including line charts, pie charts, bar charts, and heat maps.",
+      "Developed and maintained commonly used components such as a numeric keypad, date range selector, etc.",
+      "Solved cross-platform/device/browser issues.",
+      "Technologies used: Vue.js, Nuxt.js, Vuex, D3.js"
     ],
     "crowdinsight": "CrowdInsight",
     "ciJD": [

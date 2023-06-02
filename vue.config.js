@@ -5,17 +5,17 @@ module.exports = {
         prependData: `
           @import "@/assets/scss/reset.scss";
           @import "@/assets/scss/main.scss";
-        `
+        `,
       },
-    }
+    },
   },
 
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     config.module
-      .rule('md')
+      .rule("md")
       .test(/\.md$/)
-      .use('raw-loader')
-      .loader('raw-loader')
+      .use("raw-loader")
+      .loader("raw-loader")
       .end();
 
     // config
@@ -25,10 +25,10 @@ module.exports = {
 
   pluginOptions: {
     i18n: {
-      locale: 'zh',
-      fallbackLocale: 'zh',
-      localeDir: 'locales',
-      enableInSFC: false
-    }
-  }
+      locale: "en",
+      fallbackLocale: "en",
+      localeDir: "locales",
+      enableInSFC: false,
+    },
+  },
 };

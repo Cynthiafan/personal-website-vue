@@ -32,18 +32,18 @@
           a(:href="link.url" target="_blank" rel="noopener noreferrer")
             font-awesome-icon(:icon="link.icon")
 
-    //- div.header-buttons
-    //-   a.download-btn(download="Frontend_Cynthia" :href="`/resume/${locale}_202005.pdf`") {{ $t(`${page}.downloadCV`) }}
+    div.header-buttons
+      a.download-btn(download="Frontend_Cynthia" :href="`/resume/Cynthia_Fan_230602.pdf`") {{ $t(`${page}.downloadCV`) }}
 
     div.copyrights {{ currentYear }} All rights reserved.
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   data() {
     return {
-      page: 'menu',
+      page: "menu",
     };
   },
   props: {
@@ -53,7 +53,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['locale']),
+    ...mapGetters(["locale"]),
     currentPath() {
       return this.$route.path;
     },
@@ -62,9 +62,9 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['switchLocale']),
+    ...mapActions(["switchLocale"]),
     toggleLanguage() {
-      const locale = this.locale === 'zh' ? 'en' : 'zh';
+      const locale = this.locale === "zh" ? "en" : "zh";
 
       this.switchLocale(locale);
     },
@@ -133,7 +133,7 @@ export default {
       top: 7%;
       left: 7%;
       border-radius: 300px;
-      content: '';
+      content: "";
       height: calc(100% + 0px);
       width: calc(100% + 0px);
       background-image: -webkit-repeating-radial-gradient(
