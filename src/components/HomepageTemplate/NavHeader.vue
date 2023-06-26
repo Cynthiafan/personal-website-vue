@@ -33,7 +33,7 @@
             font-awesome-icon(:icon="link.icon")
 
     div.header-buttons
-      a.download-btn(download="Frontend_Cynthia" :href="`/resume/Cynthia_Fan_230602.pdf`") {{ $t(`${page}.downloadCV`) }}
+      a.download-btn(download="Frontend_Cynthia" href="http://psce.pw/53ppte" target="_blank") {{ $t(`${page}.downloadCV`) }}
 
     div.copyrights {{ currentYear }} All rights reserved.
 </template>

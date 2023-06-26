@@ -9,7 +9,7 @@
   },
   "about": {
     "intro": "I’m a Versatile frontend engineer with 5+ years of development experience in website and web application development, specializing in Vue.js and its ecosystem. Proficient in developing service-oriented websites targeting end users, with a strong emphasis on user experience, website performance, and SEO ranking. I am highly disciplined, responsible, and adaptable, capable of both collaborative teamwork and independent work. I enjoy working together in a team with a shared goal, but I am also very capable to work independently.",
-    "location": "Amsterdam, Netherlands 🇳🇱",
+    "location": "Tokyo, Japan 🇯🇵",
     "webDev": "Mainly focus on front-end development. Having a sensitivity to UI/UX, and strive to develop websites that both fashionable and well-performance. ",
     "copywriting": "High sensitivity to words, and good in writing copy and proofreading. Besides, capable to determine the style of writing according to the target audience, to ensure the style consistency and professionalism.",
     "kentTestimonial": "(translated) Cynthia possesses personal qualities of being quiet but not shy, with excellent communication and storytelling skills in various situations that require expression. She works well with colleagues and creates a harmonious working atmosphere. In terms of job performance, she has thorough thinking and a broad perspective, demonstrating meticulousness and organization in her work. She is a reliable partner who can share the workload of her supervisor and handle important tasks with their trust. In terms of professional skills, she has a solid foundation in JavaScript development and possesses the knowledge and skills expected of a frontend engineer. What sets her apart is her proactive self-improvement, making her an outstanding engineer with both competence and limitless potential!",
@@ -24,7 +24,7 @@
   "resume": {
     "aotter": "Aotter",
     "aotterJD": [
-      "Designed, implemented, and maintained a UI framework for the brand identity, which is based on Chakra UI and published on Github packages, significantly reducing the time needed for developing platforms.",
+      "Implemented, and maintained a UI library from scratch to release, which is based on Chakra UI and published on Github packages, significantly reducing the time needed for developing platforms.",
       "Optimized websites based on Google Core Web Vitals, including addressing issues related to LCP and CLS, generating effective webpage indexing, and improving website exposure by 20%.",
       "Collaborated with the marketing team to optimize the user experience of URL shortener service, which makes 3x benefit profits year-over-year.",
       "Integrated Google Adsense and Trek Ad into Google Ad Manager, and maintained customized code in Creative Template. Not only improve ad fill rate to nearly 100% but reduce maintenance time costs.",
