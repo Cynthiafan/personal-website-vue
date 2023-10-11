@@ -16,7 +16,7 @@
           :class="{ active: block.path === currentPath }")
           span.menu-icon.lnr(:class="block.icon")
           span.link-text {{ $_handleI18n(block, page, 'text') }}
-      li.language
+      //- li.language
         div.divide
         div.nav-item(@click="toggleLanguage")
           font-awesome-icon(:icon="['fas', 'globe']")

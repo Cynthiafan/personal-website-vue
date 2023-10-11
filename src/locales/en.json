@@ -8,7 +8,7 @@
     "frontendDeveloper": "Front-end Developer"
   },
   "about": {
-    "intro": "I’m a Versatile frontend engineer with 5+ years of development experience in website and web application development, specializing in Vue.js and its ecosystem. Proficient in developing service-oriented websites targeting end users, with a strong emphasis on user experience, website performance, and SEO ranking. I am highly disciplined, responsible, and adaptable, capable of both collaborative teamwork and independent work. I enjoy working together in a team with a shared goal, but I am also very capable to work independently.",
+    "intro": "I’m a Versatile frontend engineer with 4 years of development experience in website and web application development, specializing in Vue.js and its ecosystem. Proficient in developing service-oriented websites targeting end users, with a strong emphasis on user experience, website performance, and SEO ranking. I am highly disciplined, responsible, and adaptable, capable of both collaborative teamwork and independent work. I enjoy working together in a team with a shared goal, but I am also very capable to work independently.",
     "location": "Tokyo, Japan 🇯🇵",
     "webDev": "Mainly focus on front-end development. Having a sensitivity to UI/UX, and strive to develop websites that both fashionable and well-performance. ",
     "copywriting": "High sensitivity to words, and good in writing copy and proofreading. Besides, capable to determine the style of writing according to the target audience, to ensure the style consistency and professionalism.",
@@ -74,9 +74,7 @@
     ],
     "koreaUniversity": "Korea University",
     "koreanLanguageCenter": "Korean Language Center",
-    "languageCenterDescription": [
-      "Passed Test of Proficiency in Korean level 3"
-    ]
+    "languageCenterDescription": ["Passed Test of Proficiency in Korean level 3"]
   },
   "portfolio": {
     "techBlog": "Tech Blog",
